@@ -12,17 +12,20 @@ package com.jcfdb.entites;
 public class Partie {
     private String id, joueur1, joueur2;
     private char couleurJ1 = ' ', couleurJ2 = ' ';
+    private GrilleJeu grille;
     
     public Partie () {
         this.id = "";
         this.joueur1 = "";
         this.joueur2 = "";
+        this.grille = new GrilleJeu();
     }
     
-    public Partie (String id, String j1, String j2) {
+    public Partie (String id, String j1, String j2, GrilleJeu grille) {
         this.id = id;
         this.joueur1 = j1;
         this.joueur2 = j2;
+        this.grille = grille;
     }
     
     public String getId() {

@@ -9,12 +9,12 @@ package com.jcfdb.entites;
  * @author moumene
  */
 public class GrilleJeu {
-    private String id, idPartie;
+    //private String id, idPartie;
     private char[][] cases;
 
     public GrilleJeu() {
-        this.id = "";
-        this.idPartie = "";
+        //this.id = "";
+        //this.idPartie = "";
         this.cases = new char[][]{ // Initialisation des cases du tableau 3*3
             { ' ', ' ', ' ' },
             { ' ', ' ', ' ' },
@@ -22,37 +22,37 @@ public class GrilleJeu {
         };
     }
 
-    public GrilleJeu(String id, String partie) {
-        this.id = id;
-        this.idPartie = partie;
-        this.cases = new char[][]{ // Initialisation des cases du tableau 3*3
-            { ' ', ' ', ' ' },
-            { ' ', ' ', ' ' },
-            { ' ', ' ', ' ' }
-        };
-    }    
+    //public GrilleJeu(String id, String partie) {
+        //this.id = id;
+        //this.idPartie = partie;
+    //    this.cases = new char[][]{ // Initialisation des cases du tableau 3*3
+    //        { ' ', ' ', ' ' },
+    //        { ' ', ' ', ' ' },
+    //        { ' ', ' ', ' ' }
+    //    };
+    //}    
     
-    public GrilleJeu(String id, String partie, char[][] grille) {
-        this.id = id;
-        this.idPartie = partie;
+    public GrilleJeu(char[][] grille) {
+        //this.id = id;
+        //this.idPartie = partie;
         this.cases = grille;
     }  
 
-    public String getId() {
-        return id;
-    }
+    //public String getId() {
+    //    return id;
+    //}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    //public void setId(String id) {
+    //    this.id = id;
+    //}
 
-    public String getIdPartie() {
-        return idPartie;
-    }
+    //public String getIdPartie() {
+    //    return idPartie;
+    //}
 
-    public void setIdPartie(String partie) {
-        this.idPartie = partie;
-    }
+    //public void setIdPartie(String partie) {
+    //    this.idPartie = partie;
+    //}
     
     public char[][] getCases() {
         return cases;
@@ -67,6 +67,18 @@ public class GrilleJeu {
     }
     public void setCase(int ligne, int colonne, char valeur) {
         this.cases[ligne][colonne] = valeur;
+    }
+    
+    @Override
+    public String toString() {
+        String chaine = new String();
+        for (int i=0;i<3;i++) {
+            for (int j=0;j<3;j++) {
+                chaine += getCase(i,j);
+            }
+            chaine += "\n";
+        }
+        return chaine;
     }
     
 }
