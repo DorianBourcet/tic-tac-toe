@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Lun 31 Octobre 2016 à 15:18
+-- Généré le :  Dim 06 Novembre 2016 à 12:52
 -- Version du serveur :  5.7.11
 -- Version de PHP :  5.6.18
 
@@ -23,36 +23,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `grille_jeu`
---
-
-CREATE TABLE `grille_jeu` (
-  `id` int(11) NOT NULL,
-  `id_partie` int(11) NOT NULL,
-  `11` tinyint(1) NOT NULL,
-  `12` tinyint(1) NOT NULL,
-  `13` tinyint(1) NOT NULL,
-  `21` tinyint(1) NOT NULL,
-  `22` tinyint(1) NOT NULL,
-  `23` tinyint(1) NOT NULL,
-  `31` tinyint(1) NOT NULL,
-  `32` tinyint(1) NOT NULL,
-  `33` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `joueur`
---
-
-CREATE TABLE `joueur` (
-  `pseudo` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `partie`
 --
 
@@ -61,18 +31,42 @@ CREATE TABLE `partie` (
   `joueur1` varchar(30) NOT NULL,
   `joueur2` varchar(30) NOT NULL,
   `couleur_joueur1` varchar(1) NOT NULL,
-  `terminee` tinyint(1) NOT NULL
+  `main` varchar(30) NOT NULL,
+  `00` varchar(1) NOT NULL,
+  `01` varchar(1) NOT NULL,
+  `02` varchar(1) NOT NULL,
+  `10` varchar(1) NOT NULL,
+  `11` varchar(1) NOT NULL,
+  `12` varchar(1) NOT NULL,
+  `20` varchar(1) NOT NULL,
+  `21` varchar(1) NOT NULL,
+  `22` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `utilisateur`
+--
+
+CREATE TABLE `utilisateur` (
+  `pseudo` varchar(30) NOT NULL,
+  `motdepasse` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `utilisateur`
+--
+
+INSERT INTO `utilisateur` (`pseudo`, `motdepasse`) VALUES
+('dodo', 'dodo'),
+('jycy', 'jycy'),
+('titi', 'titi'),
+('toto', 'toto');
 
 --
 -- Index pour les tables exportées
 --
-
---
--- Index pour la table `grille_jeu`
---
-ALTER TABLE `grille_jeu`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `partie`
@@ -81,14 +75,15 @@ ALTER TABLE `partie`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `utilisateur`
+--
+ALTER TABLE `utilisateur`
+  ADD UNIQUE KEY `pseudo` (`pseudo`);
+
+--
 -- AUTO_INCREMENT pour les tables exportées
 --
 
---
--- AUTO_INCREMENT pour la table `grille_jeu`
---
-ALTER TABLE `grille_jeu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `partie`
 --

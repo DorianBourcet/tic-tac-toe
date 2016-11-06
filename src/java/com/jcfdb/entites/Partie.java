@@ -11,10 +11,13 @@ import java.util.Random;
  *
  * @author usager
  */
+
+
 public class Partie {
-    private String id, joueur1, joueur2, main;
+    private String id, joueur1, joueur2, vainqueur, main; // main : joueur dont c'est le tour de jouer
     private char couleurJ1 = ' ', couleurJ2 = ' ';
     private char[][] grille;
+    private Boolean terminee;
     
     public Partie () {
         this.id = "";
@@ -25,7 +28,7 @@ public class Partie {
             { ' ', ' ', ' ' },
             { ' ', ' ', ' ' }
         };
-        //this.initialiser();
+        this.terminee = false;
     }
     
     public Partie (String id, String j1, String j2, char[][] grille) {
@@ -33,8 +36,10 @@ public class Partie {
         this.joueur1 = j1;
         this.joueur2 = j2;
         this.grille = grille;
-        //this.initialiser();
+        this.terminee = false;
     }
+    
+    // ========== Accesseurs et mutateurs ==========
     
     public String getId() {
         return id;
@@ -99,9 +104,27 @@ public class Partie {
         this.main = m;
     }
     
-    public void initialiser() {
+    public String getVainqueur() {
+        return vainqueur;
+    }
+    
+    public void setVainqueur(String vainqueur) {
+        this.vainqueur = vainqueur;
+    }
+    
+    public Boolean isTerminee() {
+        return terminee;
+    }
+    
+    public void setTerminee(Boolean t) {
+        this.terminee = t;
+    }
+    
+    // ========== Méthodes du jeu ==========
+    
+    public void initialiser() { // Permet d'affecter aléatoirement une couleur (X ou O) pour chaque joueur et de définir qui commence. Initialisation de la partie.
         Random random = new Random();
-        if (random.nextBoolean()) {
+        if (random.nextBoolean()) { // Attribution aléatoire des couleurs
             this.couleurJ1 = 'X';
             this.couleurJ2 = 'O';
         }
@@ -109,24 +132,47 @@ public class Partie {
             this.couleurJ1 = 'O';
             this.couleurJ2 = 'X';
         }
-        if (random.nextBoolean())
+        if (random.nextBoolean()) // Qui commence ?
             this.main = this.joueur1;
         else
             this.main = this.joueur2;
     }
     
-    public Boolean verifierLigne() {
-        for (int i=0;i<3;i++) // On vérifie la présence de trois couleurs identiques sur les lignes horizontales
-            if ((this.getCase(i, 0) == this.getCase(i,1)) && (this.getCase(i,0) == this.getCase(i,2)))
-                return true;
-        for (int i=0;i<3;i++) // On vérifie la présence de trois couleurs identiques sur les lignes verticales
-            if ((this.getCase(0,i) == this.getCase(1,i)) && (this.getCase(0,i) == this.getCase(2,i)))
-                return true;
-        if ((this.getCase(0,0) == this.getCase(1,1)) && (this.getCase(0,0) == this.getCase(2,2)))
-            return true;
-        if ((this.getCase(0,0) == this.getCase(1,1)) && (this.getCase(0,0) == this.getCase(2,2)))
-            return true;
-        return false;
+    public Boolean verifierLigne() { // On vérifie si au moins une ligne de cases identiques est présente.
+        for (int i=0;i<3;i++) {
+            if ((((this.getCase(i,0) == this.getCase(i,1)) && (this.getCase(i,0) == this.getCase(i,2))) || ((this.getCase(0,i) == this.getCase(1,i)) && (this.getCase(0,i) == this.getCase(2,i)))) && (this.getCase(i,i) != ' ')) { // On vérifie la présence de trois couleurs identiques sur les trois lignes horizontales
+                terminee = true;
+                return terminee;
+            }
+        }
+        if ((this.getCase(0,0) == this.getCase(1,1)) && (this.getCase(0,0) == this.getCase(2,2)) && (this.getCase(0,0) != ' ')) { // On vérifie sur la diagonale "nord-ouest - sud-est"
+            terminee = true;
+            return terminee;
+        }
+        if ((this.getCase(2,0) == this.getCase(1,1)) && (this.getCase(2,0) == this.getCase(0,2)) && (this.getCase(2,0) != ' ')) // On vérifie sur la diagonale "sud-ouest - nord-est"
+            terminee = true;
+        return terminee;
+    }
+    
+    public Boolean verifierGrillePleine() { // On vérifie si la grille est totalement jouée (toutes les cases remplies)
+        for (int i=0;i<3;i++) {
+            for (int j=0;j<3;j++) {
+                if (grille[i][j] == ' ')
+                    return false;
+            }
+        }
+        return true;
+    }
+    
+    //public void jouer(String joueur, int ligne, int colonne) {
+    //    if (joueur != main || ligne >= 3 || ligne < 0 || colonne >= 3 || colonne < 0) {}
+    //}
+    
+    public void changeMain() {
+        if (main == joueur1)
+            main = joueur2;
+        else if (main == joueur2)
+            main = joueur1;
     }
     
     @Override
