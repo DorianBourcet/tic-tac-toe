@@ -15,28 +15,40 @@ import java.util.Random;
 
 public class Partie {
     private String id, joueur1, joueur2, vainqueur, main; // main : joueur dont c'est le tour de jouer
-    private char couleurJ1 = ' ', couleurJ2 = ' ';
-    private char[][] grille;
-    private Boolean terminee;
+    private char signeJ1 = ' ', signeJ2 = ' ';
+    private GrilleJeu grille;
+    private Boolean terminee = false;
     
     public Partie () {
         this.id = "";
         this.joueur1 = "";
         this.joueur2 = "";
-        this.grille = new char[][]{ // Initialisation des cases du tableau 3*3
-            { ' ', ' ', ' ' },
-            { ' ', ' ', ' ' },
-            { ' ', ' ', ' ' }
-        };
-        this.terminee = false;
+        this.grille = new GrilleJeu();
+    }
+    
+    public Partie (String j1, String j2) {
+        this.joueur1 = j1;
+        this.joueur2 = j2;
+    }
+    
+    public Partie (String id, String j1, String j2) {
+        this.id = id;
+        this.joueur1 = j1;
+        this.joueur2 = j2;
+    }
+    
+    public Partie (String id, String j1, String j2, GrilleJeu grille) {
+        this.id = id;
+        this.joueur1 = j1;
+        this.joueur2 = j2;
+        this.grille = grille;
     }
     
     public Partie (String id, String j1, String j2, char[][] grille) {
         this.id = id;
         this.joueur1 = j1;
         this.joueur2 = j2;
-        this.grille = grille;
-        this.terminee = false;
+        this.grille = new GrilleJeu(grille);
     }
     
     // ========== Accesseurs et mutateurs ==========
@@ -65,35 +77,20 @@ public class Partie {
         this.joueur2 = j;
     }
     
-    public char getCouleurJ1() {
-        return couleurJ1;
+    public char getSigneJ1() {
+        return signeJ1;
     }
     
-    public void setCouleurJ1(char c) {
-        this.couleurJ1 = c;
+    public void setSigneJ1(char c) {
+        this.signeJ1 = c;
     }
     
-    public char getCouleurJ2() {
-        return couleurJ2;
+    public char getSigneJ2() {
+        return signeJ2;
     }
     
-    public void setCouleurJ2(char j) {
-        this.couleurJ2 = j;
-    }
-    
-    public char[][] getGrille() {
-        return grille;
-    }
-
-    public void setGrille(char[][] grille) {
-        this.grille = grille;
-    }
-    
-    public char getCase(int ligne, int colonne) {
-        return this.grille[ligne][colonne];
-    }
-    public void setCase(int ligne, int colonne, char valeur) {
-        this.grille[ligne][colonne] = valeur;
+    public void setSigneJ2(char j) {
+        this.signeJ2 = j;
     }
     
     public String getMain() {
@@ -112,6 +109,14 @@ public class Partie {
         this.vainqueur = vainqueur;
     }
     
+    public GrilleJeu getGrille() {
+        return grille;
+    }
+    
+    public void setGrille(GrilleJeu g) {
+        this.grille = g;
+    }
+    
     public Boolean isTerminee() {
         return terminee;
     }
@@ -122,46 +127,20 @@ public class Partie {
     
     // ========== Méthodes du jeu ==========
     
-    public void initialiser() { // Permet d'affecter aléatoirement une couleur (X ou O) pour chaque joueur et de définir qui commence. Initialisation de la partie.
+    public void initialiser() { // Permet d'affecter aléatoirement une signe (X ou O) pour chaque joueur et de définir qui commence. Initialisation de la partie.
         Random random = new Random();
-        if (random.nextBoolean()) { // Attribution aléatoire des couleurs
-            this.couleurJ1 = 'X';
-            this.couleurJ2 = 'O';
+        if (random.nextBoolean()) { // Attribution aléatoire des signes
+            this.signeJ1 = 'X';
+            this.signeJ2 = 'O';
         }
         else {
-            this.couleurJ1 = 'O';
-            this.couleurJ2 = 'X';
+            this.signeJ1 = 'O';
+            this.signeJ2 = 'X';
         }
         if (random.nextBoolean()) // Qui commence ?
             this.main = this.joueur1;
         else
             this.main = this.joueur2;
-    }
-    
-    public Boolean verifierLigne() { // On vérifie si au moins une ligne de cases identiques est présente.
-        for (int i=0;i<3;i++) {
-            if ((((this.getCase(i,0) == this.getCase(i,1)) && (this.getCase(i,0) == this.getCase(i,2))) || ((this.getCase(0,i) == this.getCase(1,i)) && (this.getCase(0,i) == this.getCase(2,i)))) && (this.getCase(i,i) != ' ')) { // On vérifie la présence de trois couleurs identiques sur les trois lignes horizontales
-                terminee = true;
-                return terminee;
-            }
-        }
-        if ((this.getCase(0,0) == this.getCase(1,1)) && (this.getCase(0,0) == this.getCase(2,2)) && (this.getCase(0,0) != ' ')) { // On vérifie sur la diagonale "nord-ouest - sud-est"
-            terminee = true;
-            return terminee;
-        }
-        if ((this.getCase(2,0) == this.getCase(1,1)) && (this.getCase(2,0) == this.getCase(0,2)) && (this.getCase(2,0) != ' ')) // On vérifie sur la diagonale "sud-ouest - nord-est"
-            terminee = true;
-        return terminee;
-    }
-    
-    public Boolean verifierGrillePleine() { // On vérifie si la grille est totalement jouée (toutes les cases remplies)
-        for (int i=0;i<3;i++) {
-            for (int j=0;j<3;j++) {
-                if (grille[i][j] == ' ')
-                    return false;
-            }
-        }
-        return true;
     }
     
     //public void jouer(String joueur, int ligne, int colonne) {
@@ -178,13 +157,8 @@ public class Partie {
     @Override
     public String toString() {
         String chaine = new String();
-        chaine = "id : " + this.id + " j1 : " + this.joueur1 + " " + this.couleurJ1 + " j2 : " + this.joueur2 + " " + this.couleurJ2 + "\n\n";
-        for (int i=0;i<3;i++) {
-            for (int j=0;j<3;j++) {
-                chaine += getCase(i,j);
-            }
-            chaine += "\n";
-        }
+        chaine = "id : " + this.id + " j1 : " + this.joueur1 + " " + this.signeJ1 + " j2 : " + this.joueur2 + " " + this.signeJ2 + "\n\n";
+        chaine += this.grille.toString();
         chaine += "\n\nAu tour de : " + main;
         return chaine;
     }
