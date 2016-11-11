@@ -74,4 +74,22 @@ public class GrilleJeu {
         return chaine;
     }
     
+    public String toJSON() {
+        String json;
+        json = "[";
+        for (int i=0;i<3;i++) {
+            json += "{";
+            for (int j=0;j<3;j++) {
+                json = "\"" + i + j + "\":\"" + this.cases[i][j] + "\"";
+                if (j<2)
+                    json += ",";
+            }
+            json += "}";
+            if (i<2)
+                json += ",";
+        }
+        json += "]";
+        return json;
+    }
+    
 }
