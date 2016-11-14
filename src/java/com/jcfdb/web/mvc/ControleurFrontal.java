@@ -30,66 +30,31 @@ public class ControleurFrontal extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        if (action !=null)
-        {
-            if ("login".equals(action))
-            {
-                RequestDispatcher r = this.getServletContext().getRequestDispatcher("/signin");  //redirection vers la servlet login
-                r.forward(request, response);     
-                return;
-            }            
-            if ("logout".equals(action))
-            {
-                RequestDispatcher r = this.getServletContext().getRequestDispatcher("/signout");  //redirection vers la servlet login
-                r.forward(request, response);                
-            }            
-            return;
-        }
-        String  n1 = request.getParameter("nb1"),
-                n2 = request.getParameter("nb2"),
-                op = request.getParameter("operation");
-        String msg = null;
-        if ((n1!=null && n1.trim().equals("")) || (n2!=null && n2.trim().equals("")))
-        {
-            msg = "Vous devez donner 2 nombres et choisir une opération.";
-            request.setAttribute("message", msg);
-            RequestDispatcher r = this.getServletContext().getRequestDispatcher("/index.jsp");
-            r.forward(request, response);
-        }
-        else
-        {
-          char oper;
-          if (op!=null && op.length()>0)
-              oper = op.charAt(0);
-          else
-              oper = ' ';
-          RequestDispatcher r = null;
-          switch (oper)
+        RequestDispatcher r;
+        switch (action)
           {
-              case '+' :
-                  //forward vers la servlet Addition :
-                    r = this.getServletContext().getNamedDispatcher("somme");
+              case "login" :
+                    r = this.getServletContext().getRequestDispatcher("/signin");
                     break;
-              case '-' :
-                  //forward vers la servlet Soustraction :
-                    r = this.getServletContext().getNamedDispatcher("difference");
+              case "logout" :
+                    r = this.getServletContext().getRequestDispatcher("/signout");
                     break;
-              case '*' :
-                  //forward vers la servlet Multiplication :
-                    r = this.getServletContext().getNamedDispatcher("produit");
+              case "inviter" :
+                    r = this.getServletContext().getRequestDispatcher("/invite");
                     break;
-              case '/' :
-                  //forward vers la servlet Division :
-                    r = this.getServletContext().getNamedDispatcher("division");
+              case "start" :
+                    r = this.getServletContext().getRequestDispatcher("/start");
+                    break;
+              case "turn" :
+                    r = this.getServletContext().getRequestDispatcher("/turn");
+                    break;
+              case "obtenir" :
+                    r = this.getServletContext().getRequestDispatcher("/getDatas");
                     break;
               default :
-                    msg = "Opération "+oper+" inconnue";
-                    request.setAttribute("message", msg);
-                    //forward vers la page index.jsp :
                     r = this.getServletContext().getRequestDispatcher("/index.jsp");
           }
-          r.forward(request, response);
-        }
+        r.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
