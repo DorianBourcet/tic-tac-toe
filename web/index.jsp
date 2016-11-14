@@ -1,18 +1,9 @@
 <%-- 
     Document   : index
     Created on : 2012-10-23, 20:17:01
-    Author     : moumene
+    Author     : jycy
 --%>
-<%
-    if (session.getAttribute("connecte")==null)  //non connecté
-    {
-%>
-        
-        <%//include login.jps ici avec : <jsp:include page="login.jsp" /> %>
-        
-<%
-    }
-%>
+
 
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
@@ -29,8 +20,9 @@
         <title>Tic-tac-toe</title>
     </head>
     <body>   
-        <jsp:include page="Menu.jsp" />
         <jsp:include page="Login.jsp" />
+        <jsp:include page="Menu.jsp" />
+        
         <div id = "MainScreen">
             <jsp:include page="Grid.jsp" />
         </div>
