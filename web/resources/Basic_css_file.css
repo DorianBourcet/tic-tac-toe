@@ -45,7 +45,23 @@ and open the template in the editor.
     border-width : 3px;
     margin-top: 30px;
 }
+#Player-1, #Player-2{
+    background-image:url("http://img.actucine.com/wp-content/uploads/2014/04/Bioshock.jpg");
+    height: 50px;
+    width: 50px;
+    background-size:cover;
+    border-color: #252830;
+    border-width : 3px;
+    margin-top: 10px;
+    background-position: center;
+}
 .p-name{
     text-align: center;
     color: #fff;
+}
+#Grid{
+    border-radius: 5px;
+    background-color: #252830;
+    min-height: 500px;
+    margin-top: 70px;
 }

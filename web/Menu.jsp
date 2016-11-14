@@ -10,7 +10,7 @@
             
         </div>
         <p  class="p-name">{{PlayerName}} </p>
-       <p id="btn4" >{{TEST ROTATE}}</p>  
+        <%--<p id="btn4" >{{TEST ROTATE}}</p>  --%>
     </div>
     <div id="accordion" role="tablist" aria-multiselectable="true">
         <div class="card no-marging">
