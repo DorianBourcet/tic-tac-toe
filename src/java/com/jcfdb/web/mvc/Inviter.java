@@ -4,18 +4,26 @@
  */
 package com.jcfdb.web.mvc;
 
+import com.jcfdb.entites.Invitation;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+//import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author dbourcet
  */
-public class ControleurFrontal extends HttpServlet {
+
+public class Inviter extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -29,32 +37,16 @@ public class ControleurFrontal extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("action");
-        RequestDispatcher r;
-        switch (action)
-          {
-              case "login" :
-                    r = this.getServletContext().getRequestDispatcher("/signin");
-                    break;
-              case "logout" :
-                    r = this.getServletContext().getRequestDispatcher("/signout");
-                    break;
-              case "inviter" :
-                    r = this.getServletContext().getRequestDispatcher("/invite");
-                    break;
-              case "start" :
-                    r = this.getServletContext().getRequestDispatcher("/start");
-                    break;
-              case "turn" :
-                    r = this.getServletContext().getRequestDispatcher("/turn");
-                    break;
-              case "obtenir" :
-                    r = this.getServletContext().getRequestDispatcher("/getField");
-                    break;
-              default :
-                    r = this.getServletContext().getRequestDispatcher("/index.jsp");
-          }
-        r.forward(request, response);
+        String  joueur = request.getParameter("joueur");
+        //String msg = null;
+        HttpSession session = request.getSession();
+        String hote = (String)session.getAttribute("connecte");
+        Invitation invitation = new Invitation(hote, joueur);
+        ServletContext appli = session.getServletContext();
+        List invitations = (ArrayList)appli.getAttribute("listeInvitations");
+        invitations.add(invitation);
+        appli.setAttribute("listeInvitations",invitations);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -67,6 +59,7 @@ public class ControleurFrontal extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
@@ -81,6 +74,7 @@ public class ControleurFrontal extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);

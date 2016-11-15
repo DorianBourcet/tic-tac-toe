@@ -11,45 +11,45 @@ package com.jcfdb.entites;
  */
 public class Invitation {
     
-    private User hote, invite;
+    private Joueur hote, invite;
     
     public Invitation() {
-        hote = new User();
-        invite = new User();
+        hote = new Joueur();
+        invite = new Joueur();
     }
     
-    public Invitation(User h, User i) {
+    public Invitation(Joueur h, Joueur i) {
         hote = h;
         invite = i;
     }
     
     public Invitation(String h, String i) {
-        hote = new User(h);
-        invite = new User(i);
+        hote = new Joueur(h);
+        invite = new Joueur(i);
     }
 
-    public User getHote() {
+    public Joueur getHote() {
         return hote;
     }
 
-    public void setHote(User hote) {
+    public void setHote(Joueur hote) {
         this.hote = hote;
     }
     
     public void setHote(String hote) {
-        this.hote = new User(hote);
+        this.hote = new Joueur(hote);
     }
 
-    public User getInvite() {
+    public Joueur getInvite() {
         return invite;
     }
 
-    public void setInvite(User invite) {
+    public void setInvite(Joueur invite) {
         this.invite = invite;
     }
     
     public void setInvite(String invite) {
-        this.invite = new User(invite);
+        this.invite = new Joueur(invite);
     }
     
 }

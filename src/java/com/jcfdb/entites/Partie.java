@@ -14,98 +14,50 @@ import java.util.Random;
 
 
 public class Partie {
-    private String id, joueur1, joueur2, vainqueur, main; // main : joueur dont c'est le tour de jouer
-    private char signeJ1 = ' ', signeJ2 = ' ';
+    private Joueur joueur1, joueur2, vainqueur, main; // main : joueur dont c'est le tour de jouer
     private GrilleJeu grille;
     private Boolean terminee = false;
     
     public Partie () {
-        this.id = "";
-        this.joueur1 = "";
-        this.joueur2 = "";
-        this.grille = new GrilleJeu();
+        
     }
     
     public Partie (String j1, String j2) {
-        this.joueur1 = j1;
-        this.joueur2 = j2;
-    }
-    
-    public Partie (String id, String j1, String j2) {
-        this.id = id;
-        this.joueur1 = j1;
-        this.joueur2 = j2;
-    }
-    
-    public Partie (String id, String j1, String j2, GrilleJeu grille) {
-        this.id = id;
-        this.joueur1 = j1;
-        this.joueur2 = j2;
-        this.grille = grille;
-    }
-    
-    public Partie (String id, String j1, String j2, char[][] grille) {
-        this.id = id;
-        this.joueur1 = j1;
-        this.joueur2 = j2;
-        this.grille = new GrilleJeu(grille);
+        this.joueur1 = new Joueur(j1);
+        this.joueur2 = new Joueur(j2);
     }
     
     // ========== Accesseurs et mutateurs ==========
     
-    public String getId() {
-        return id;
-    }
-    
-    public void setId(String id) {
-        this.id = id;
-    }
-    
-    public String getJoueur1() {
+    public Joueur getJoueur1() {
         return joueur1;
     }
     
-    public void setJoueur1(String j) {
+    public void setJoueur1(Joueur j) {
         this.joueur1 = j;
     }
     
-    public String getJoueur2() {
+    public Joueur getJoueur2() {
         return joueur2;
     }
     
-    public void setJoueur2(String j) {
+    public void setJoueur2(Joueur j) {
         this.joueur2 = j;
     }
     
-    public char getSigneJ1() {
-        return signeJ1;
-    }
-    
-    public void setSigneJ1(char c) {
-        this.signeJ1 = c;
-    }
-    
-    public char getSigneJ2() {
-        return signeJ2;
-    }
-    
-    public void setSigneJ2(char j) {
-        this.signeJ2 = j;
-    }
-    
-    public String getMain() {
+    public Joueur getMain() {
         return this.main;
     }
     
-    public void setMain(String m) {
+    public void setMain(Joueur m) {
         this.main = m;
     }
     
-    public String getVainqueur() {
+    public Joueur getVainqueur() {
         return vainqueur;
     }
     
-    public void setVainqueur(String vainqueur) {
+    public void setVainqueur(Joueur vainqueur) {
         this.vainqueur = vainqueur;
     }
     
@@ -130,12 +82,12 @@ public class Partie {
     public void initialiser() { // Permet d'affecter aléatoirement une signe (X ou O) pour chaque joueur et de définir qui commence. Initialisation de la partie.
         Random random = new Random();
         if (random.nextBoolean()) { // Attribution aléatoire des signes
-            this.signeJ1 = 'X';
-            this.signeJ2 = 'O';
+            this.joueur1.setSymbole('X');
+            this.joueur2.setSymbole('O');
         }
         else {
-            this.signeJ1 = 'O';
-            this.signeJ2 = 'X';
+            this.joueur1.setSymbole('O');
+            this.joueur2.setSymbole('X');
         }
         if (random.nextBoolean()) // Qui commence ?
             this.main = this.joueur1;
@@ -143,9 +95,10 @@ public class Partie {
             this.main = this.joueur2;
     }
     
-    //public void jouer(String joueur, int ligne, int colonne) {
-    //    if (joueur != main || ligne >= 3 || ligne < 0 || colonne >= 3 || colonne < 0) {}
-    //}
+    public void remplirCase(int ligne, int colonne) {
+        //if (ligne >= 3 || ligne < 0 || colonne >= 3 || colonne < 0) {}
+        this.grille.setCase(ligne, colonne, this.main.getSymbole());
+    }
     
     public void changeMain() {
         if (main == joueur1)
@@ -157,9 +110,9 @@ public class Partie {
     @Override
     public String toString() {
         String chaine = new String();
-        chaine = "id : " + this.id + " j1 : " + this.joueur1 + " " + this.signeJ1 + " j2 : " + this.joueur2 + " " + this.signeJ2 + "\n\n";
+        chaine = "j1 : " + this.joueur1.getNom() + " " + this.joueur1.getSymbole() + " j2 : " + this.joueur2.getNom() + " " + this.joueur2.getSymbole() + "\n\n";
         chaine += this.grille.toString();
-        chaine += "\n\nAu tour de : " + main;
+        chaine += "\n\nAu tour de : " + main.getNom();
         return chaine;
     }
 }
