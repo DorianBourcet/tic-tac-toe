@@ -17,19 +17,35 @@ import java.util.ListIterator;
  */
 public class GestionnaireJeu {
     
-    private Joueur joueur;
     private HttpSession session;
 
-    public GestionnaireJeu(Joueur joueur) {
-        this.joueur = joueur;
+    public GestionnaireJeu(HttpSession joueur) {
+        this.session = joueur;
     }
 
-    public Joueur getJoueur() {
+    /*public Joueur getJoueur() {
         return joueur;
-    }
+    }*/
 
-    public void setUnJoueur(Joueur joueur) {
+    /*public void setUnJoueur(Joueur joueur) {
         this.joueur = joueur;
+    }*/
+    
+    public void ajouterJoueur() {
+        List joueurs = (ArrayList)session.getServletContext().getAttribute("listeJoueurs");
+        joueurs.add(session.getAttribute("connecte"));
+        session.getServletContext().setAttribute("listeJoueurs", joueurs);
+    }
+    
+    private void enleverJoueur() {
+        List joueurs = (ArrayList)session.getServletContext().getAttribute("listeJoueurs");
+        // A continuer http://www.java67.com/2014/03/2-ways-to-remove-elementsobjects-from-ArrayList-java.html
+        //Iterator itr = joueurs.iterator();
+        joueurs.remove((String)session.getAttribute("connecte"));
+        session.getServletContext().setAttribute("listeJoueurs", joueurs);
+        
+        //List invitations = (ArrayList)hse.getSession().getServletContext().getAttribute("listeInvitations");
+        
     }
     
     public List getMaListeJoueurs() {

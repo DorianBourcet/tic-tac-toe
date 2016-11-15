@@ -26,6 +26,8 @@ public class EcouteurApplication implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         System.out.println("Application d�marr�e");
+        ServletContext appli = sce.getServletContext();
+        appli.setAttribute("nbConnectes", 0);
         initialiserAttributs(sce.getServletContext());
     }
 

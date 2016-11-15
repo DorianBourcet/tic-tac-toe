@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -29,13 +30,20 @@ public class ControleurFrontal extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("action");
+        //String action = request.getParameter("action");
+        String uri = request.getRequestURI();
+        System.out.println("Hahahaha "+uri);
+        String substring[] = uri.split("/");
+        String action = substring[substring.length-1].replace(".do", "");
+        HttpSession session = request.getSession();
         RequestDispatcher r;
+        System.out.println("Je suis le controleur !");
+        if (session.getAttribute("connecte") == null) {
+            r = this.getServletContext().getRequestDispatcher("/signin");
+            r.forward(request, response);
+        }
         switch (action)
           {
-              case "login" :
-                    r = this.getServletContext().getRequestDispatcher("/signin");
-                    break;
               case "logout" :
                     r = this.getServletContext().getRequestDispatcher("/signout");
                     break;

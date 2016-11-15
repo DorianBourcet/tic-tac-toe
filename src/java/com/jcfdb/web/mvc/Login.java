@@ -8,6 +8,7 @@ import com.jcfdb.entites.User;
 import com.atoudeft.jdbc.Connexion;
 import com.jcfdb.jdbc.implementation.UserDao;
 import java.io.IOException;
+import static java.lang.System.out;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -56,25 +57,28 @@ public class Login extends HttpServlet {
         if (user==null)
         {
             //Utilisateur inexistant
-            request.setAttribute("message", "Utilisateur "+u+" inexistant.");
+            //request.setAttribute("message", "Utilisateur "+u+" inexistant.");
             //response.sendRedirect("login.jsp");Ne fonctionne pas correctement (ie. perd le message d'erreur).
-            RequestDispatcher r = this.getServletContext().getRequestDispatcher("/Login.jsp");
-            r.forward(request, response);
+            //RequestDispatcher r = this.getServletContext().getRequestDispatcher("/Login.jsp");
+            //r.forward(request, response);
+            out.println("0");
         }
         else if (!user.getPassword().equals(p))
         {
             //Mot de passe incorrect
-            request.setAttribute("message", "Mot de passe incorrect.");
-            RequestDispatcher r = this.getServletContext().getRequestDispatcher("/Login.jsp");
-            r.forward(request, response);
+            //request.setAttribute("message", "Mot de passe incorrect.");
+            //RequestDispatcher r = this.getServletContext().getRequestDispatcher("/Login.jsp");
+            //r.forward(request, response);
+            out.println("2");
         }
         else
         {
             //connexion OK
             HttpSession session = request.getSession(true);
             session.setAttribute("connecte", u);
-            RequestDispatcher r = this.getServletContext().getRequestDispatcher("/index.jsp");
-            r.forward(request, response);
+            //RequestDispatcher r = this.getServletContext().getRequestDispatcher("/index.jsp");
+            //r.forward(request, response);
+            out.println("1");
         }
     }
 
