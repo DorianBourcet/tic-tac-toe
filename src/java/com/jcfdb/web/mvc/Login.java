@@ -8,7 +8,7 @@ import com.jcfdb.entites.User;
 import com.atoudeft.jdbc.Connexion;
 import com.jcfdb.jdbc.implementation.UserDao;
 import java.io.IOException;
-import static java.lang.System.out;
+import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -33,6 +33,7 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //out.println("servlet login");
         String  u = request.getParameter("username"),
                 p = request.getParameter("password");
         if (u==null || u.trim().equalsIgnoreCase(""))
@@ -49,6 +50,7 @@ public class Login extends HttpServlet {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
+        PrintWriter out = response.getWriter();
         
         Connexion.setUrl(this.getServletContext().getInitParameter("urlBd"));
         UserDao dao = new UserDao(Connexion.getInstance());
@@ -61,7 +63,7 @@ public class Login extends HttpServlet {
             //response.sendRedirect("login.jsp");Ne fonctionne pas correctement (ie. perd le message d'erreur).
             //RequestDispatcher r = this.getServletContext().getRequestDispatcher("/Login.jsp");
             //r.forward(request, response);
-            out.println("0");
+            out.print("0");
         }
         else if (!user.getPassword().equals(p))
         {
@@ -69,7 +71,7 @@ public class Login extends HttpServlet {
             //request.setAttribute("message", "Mot de passe incorrect.");
             //RequestDispatcher r = this.getServletContext().getRequestDispatcher("/Login.jsp");
             //r.forward(request, response);
-            out.println("2");
+            out.print("2");
         }
         else
         {
@@ -78,7 +80,7 @@ public class Login extends HttpServlet {
             session.setAttribute("connecte", u);
             //RequestDispatcher r = this.getServletContext().getRequestDispatcher("/index.jsp");
             //r.forward(request, response);
-            out.println("1");
+            out.print("1");
         }
     }
 

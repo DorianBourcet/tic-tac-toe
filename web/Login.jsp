@@ -37,21 +37,24 @@
 
 <script>
         $("#login").click(function(){
-            $.get('/login.do?username='+$('#user').val()+'&password'+$('#pass').val(),function(data,status){
+            var url = './login.do?username='+$('#user').val()+'&password='+$('#pass').val();
+            $.get(url,function(data,status){
                 switch(data){
-                    case 0:
+                    case "0":
                         //code if no user
+                        alert("case wrong user");
                         break;
-                    case 1:
-                        //code if wrong password
-                        break;
-                    case 2:
+                    case "1":
                         //code good authentification
                         $('#Login-modal').modal('hide');
                         break;
+                    case "2":
+                        //code if wrong password
+                        alert("case wrong pass");
+                        break;
                     };
                 });
-            alert("after $.get");    
+                
             });
 </script>
 

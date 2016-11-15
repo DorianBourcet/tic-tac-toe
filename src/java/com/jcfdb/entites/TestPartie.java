@@ -25,13 +25,13 @@ public class TestPartie {
         partie.getGrille().setCase(2, 0, 'X');
         partie.getGrille().setCase(2, 1, 'X');
         partie.getGrille().setCase(2, 2, 'X');
-        partie.setJoueur1("Dodo");
-        partie.setJoueur2("Jycy");
-        partie.setId("123");
+       // partie.setJoueur1("Dodo");
+       // partie.setJoueur2("Jycy");
+       // partie.setId("123");
         partie.initialiser();
         System.out.println(partie.toString());
-        System.out.println("Ligne complète ? "+partie.getGrille().verifierLigne());
-        System.out.println("Grille pleine ? "+partie.getGrille().verifierGrillePleine());
+       // System.out.println("Ligne complète ? "+partie.getGrille().verifierLigne());
+       // System.out.println("Grille pleine ? "+partie.getGrille().verifierGrillePleine());
     }
     
 }

@@ -79,6 +79,5 @@ and open the template in the editor.
 }
 .tile{
     height: 33.33%;
-    background-color: white;
-    border: solid #252830;
+    border: solid white;
 }
