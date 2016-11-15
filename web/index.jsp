@@ -20,7 +20,7 @@
         <title>Tic-tac-toe</title>
     </head>
     <body>   
-        <jsp:include page="Login.jsp" />
+        <%--<jsp:include page="Login.jsp" />--%>
         <jsp:include page="Menu.jsp" />
         
         <div id = "MainScreen">

@@ -5,8 +5,13 @@
 --%>
 
 <div id="Game" class="container col-xs-12 col-xl-8 offset-xl-2">
-    <div id="Grid" class="">
+    <div id="Grid">
         <%--Grid here--%>
+        <%
+            for(int i= 0;i<9;i++){
+                out.print("<div class='col-xs-4 tile'> case </div>");
+            }
+        %>
     </div>
         <%--Player 1--%>
     <span class="col-xs-6">
