@@ -20,7 +20,10 @@
         <title>Tic-tac-toe</title>
     </head>
     <body>   
+        <% if (session.getAttribute("connecte")==null){%>
         <jsp:include page="Login.jsp" />
+        <%}%>
+        
         <jsp:include page="Menu.jsp" />
         
         <div id = "MainScreen">

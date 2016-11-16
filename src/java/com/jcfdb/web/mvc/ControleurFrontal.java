@@ -38,33 +38,32 @@ public class ControleurFrontal extends HttpServlet {
         HttpSession session = request.getSession();
         RequestDispatcher r;
         System.out.println("Je suis le controleur !");
-        if (session.getAttribute("connecte") == null) {
-            r = this.getServletContext().getRequestDispatcher("/signin");
-            r.forward(request, response);
-            return;
-        }
-        else {
-            switch (action)
-              {
-                  case "logout" :
-                        r = this.getServletContext().getRequestDispatcher("/signout");
-                        break;
-                  case "inviter" :
-                        r = this.getServletContext().getRequestDispatcher("/invite");
-                        break;
-                  case "start" :
-                        r = this.getServletContext().getRequestDispatcher("/start");
-                        break;
-                  case "turn" :
-                        r = this.getServletContext().getRequestDispatcher("/turn");
-                        break;
-                  case "obtenir" :
-                        r = this.getServletContext().getRequestDispatcher("/getField");
-                        break;
-                  default :
-                        r = this.getServletContext().getRequestDispatcher("/index.jsp");
-              }
-        }
+        
+
+        switch (action)
+          {
+              case "login" :
+                    r = this.getServletContext().getRequestDispatcher("/signin");
+                    break;
+              case "logout" :
+                    r = this.getServletContext().getRequestDispatcher("/signout");
+                    break;
+              case "inviter" :
+                    r = this.getServletContext().getRequestDispatcher("/invite");
+                    break;
+              case "start" :
+                    r = this.getServletContext().getRequestDispatcher("/start");
+                    break;
+              case "turn" :
+                    r = this.getServletContext().getRequestDispatcher("/turn");
+                    break;
+              case "obtenir" :
+                    r = this.getServletContext().getRequestDispatcher("/getField");
+                    break;
+              default :
+                    r = this.getServletContext().getRequestDispatcher("/index.jsp");
+          }
+
         r.forward(request, response);
     }
 
