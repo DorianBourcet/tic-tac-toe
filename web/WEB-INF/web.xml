@@ -33,6 +33,10 @@
         <servlet-name>logout</servlet-name>
         <servlet-class>com.jcfdb.web.mvc.Logout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>donneesJoueur</servlet-name>
+        <servlet-class>com.jcfdb.web.mvc.GetDatas</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>controleur</servlet-name>
         <url-pattern>*.do</url-pattern>
@@ -40,6 +44,10 @@
     <servlet-mapping>
         <servlet-name>login</servlet-name>
         <url-pattern>/signin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>donneesJoueur</servlet-name>
+        <url-pattern>/getDatas</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>logout</servlet-name>
