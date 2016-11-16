@@ -37,14 +37,21 @@ public class GestionnaireJeu {
         session.getServletContext().setAttribute("listeJoueurs", joueurs);
     }
     
-    private void enleverJoueur() {
+    public void enleverJoueur() {
         List joueurs = (ArrayList)session.getServletContext().getAttribute("listeJoueurs");
         // A continuer http://www.java67.com/2014/03/2-ways-to-remove-elementsobjects-from-ArrayList-java.html
         //Iterator itr = joueurs.iterator();
         joueurs.remove((String)session.getAttribute("connecte"));
         session.getServletContext().setAttribute("listeJoueurs", joueurs);
         
-        //List invitations = (ArrayList)hse.getSession().getServletContext().getAttribute("listeInvitations");
+        List invitations = (ArrayList)session.getServletContext().getAttribute("listeInvitations");
+        Iterator itr = invitations.iterator();
+        Invitation uneInvitation;
+        while (itr.hasNext()) {
+            uneInvitation = (Invitation)itr.next();
+            if (uneInvitation.getInvite().getNom().equals(session.getAttribute("connecte")) || uneInvitation.getHote().getNom().equals(session.getAttribute("connecte")))
+                itr.remove();
+        }
         
     }
     
@@ -52,6 +59,20 @@ public class GestionnaireJeu {
         List joueurs = (ArrayList)session.getServletContext().getAttribute("listeJoueurs");
         joueurs.remove(session.getAttribute("connecte"));
         return joueurs;
+    }
+    
+    public String getMaListeJoueursJSON() {
+        List joueurs = (ArrayList)session.getServletContext().getAttribute("listeJoueurs");
+        joueurs.remove((String)session.getAttribute("connecte"));
+        Iterator itr = joueurs.iterator();
+        String json = "[";
+        while (itr.hasNext()) {
+            json +="\""+itr.next()+"\"";
+            if (itr.hasNext())
+                json += ", ";
+        }
+        json += "]";
+        return json;
     }
     
     public List getMaListeInvitations() {

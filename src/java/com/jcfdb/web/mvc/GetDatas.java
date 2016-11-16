@@ -4,9 +4,16 @@
  */
 package com.jcfdb.web.mvc;
 
+import com.jcfdb.entites.GestionnaireJeu;
+import com.jcfdb.entites.Partie;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletContext;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author dbourcet
  */
-public class ControleurFrontal extends HttpServlet {
+public class GetDatas extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -30,41 +37,23 @@ public class ControleurFrontal extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //String action = request.getParameter("action");
-        String uri = request.getRequestURI();
-        System.out.println("Hahahaha "+uri);
-        String substring[] = uri.split("/");
-        String action = substring[substring.length-1].replace(".do", "");
-        HttpSession session = request.getSession();
-        RequestDispatcher r;
-        System.out.println("Je suis le controleur !");
-        
 
-        switch (action)
-          {
-              case "login" :
-                    r = this.getServletContext().getRequestDispatcher("/signin");
+            String  e = request.getParameter("element");
+            PrintWriter out = response.getWriter();
+            GestionnaireJeu gestionnaire = new GestionnaireJeu(request.getSession(true));
+            
+            switch (e) {
+                case "listeJoueurs" :
+                    out.print(gestionnaire.getMaListeJoueursJSON());
                     break;
-              case "logout" :
-                    r = this.getServletContext().getRequestDispatcher("/signout");
+                case "listeInvitations" :
                     break;
-              case "inviter" :
-                    r = this.getServletContext().getRequestDispatcher("/invite");
+                case "grille" :
                     break;
-              case "start" :
-                    r = this.getServletContext().getRequestDispatcher("/start");
-                    break;
-              case "turn" :
-                    r = this.getServletContext().getRequestDispatcher("/turn");
-                    break;
-              case "obtenir" :
-                    r = this.getServletContext().getRequestDispatcher("/getDatas");
-                    break;
-              default :
-                    r = this.getServletContext().getRequestDispatcher("/index.jsp");
-          }
-
-        r.forward(request, response);
+                default :
+                    out.print("");
+            }
+            
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -77,6 +66,7 @@ public class ControleurFrontal extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
@@ -91,6 +81,7 @@ public class ControleurFrontal extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
@@ -101,7 +92,7 @@ public class ControleurFrontal extends HttpServlet {
      *
      * @return a String containing servlet description
      */
-
+    @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>

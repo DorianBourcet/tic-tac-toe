@@ -6,12 +6,17 @@ package com.jcfdb.web.mvc;
 
 import com.jcfdb.entites.User;
 import com.atoudeft.jdbc.Connexion;
+import com.jcfdb.entites.GestionnaireJeu;
 import com.jcfdb.jdbc.implementation.UserDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -78,6 +83,14 @@ public class Login extends HttpServlet {
             //connexion OK
             HttpSession session = request.getSession(true);
             session.setAttribute("connecte", u);
+            GestionnaireJeu gestionnaire = new GestionnaireJeu(session);
+            gestionnaire.ajouterJoueur();
+            ServletContext appli = session.getServletContext();
+            List listeJ = (ArrayList)appli.getAttribute("listeJoueurs");
+            Iterator itr = listeJ.iterator();
+            System.out.println("Joueurs connectes :");
+            while (itr.hasNext())
+                System.out.println("- "+itr.next());
             //RequestDispatcher r = this.getServletContext().getRequestDispatcher("/index.jsp");
             //r.forward(request, response);
             out.print("1");
