@@ -15,17 +15,21 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" >
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
+    
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <title>Tic-tac-toe</title>
     </head>
     <body>   
+        <% if (session.getAttribute("connecte")==null){%>
         <jsp:include page="Login.jsp" />
+        <%}%>
+        
         <jsp:include page="Menu.jsp" />
         
         <div id = "MainScreen">
             <jsp:include page="Grid.jsp" />
         </div>
     </body>
-    
+    <script src="resources/Script.js"></script>
 </html>

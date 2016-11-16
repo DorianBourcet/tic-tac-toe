@@ -8,8 +8,11 @@
     <div id="Grid">
         <%--Grid here--%>
         <%
-            for(int i= 0;i<9;i++){
-                out.print("<div class='col-xs-4 tile'> case </div>");
+            for(int i= 0;i<3;i++){
+                for(int j = 0;j<3;j++)
+                {
+                    out.print("<div class='col-xs-4 tile'> <p class = 'case' id= '"+i+j+"'></p> </div>");
+                }
             }
         %>
     </div>
