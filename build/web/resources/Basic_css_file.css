@@ -70,14 +70,24 @@ and open the template in the editor.
     padding-right: 20px;
     margin-top: 20px;
 }
-.padding-input-login+.padding-input-login{
-    margin-bottom: 20px;
-}
 
 #login{
     border-radius: 0px;
+    margin-top: 20px;
 }
 .tile{
     height: 33.33%;
     border: solid white;
+}
+.case{
+    font-size: 100px;
+    color: white;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+#WrgPass,#WrgUser{
+    text-align: center;
+    color: red;
+    display: none;
 }

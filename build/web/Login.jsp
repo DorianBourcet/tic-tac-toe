@@ -16,45 +16,15 @@
                 <span class="input-group-addon" id="User"><i class="fa fa-user" aria-hidden="true"></i></span>
                 <input id="user" name="username" type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" data-toggle="tooltip" data-placement="top" title="Entrez votre nom d'utilisateur">
             </div>
+            <div id="WrgUser">Utilisateur inexistant</div>
             <div class="input-group padding-input-login">
                 <span class="input-group-addon" id="Pass"><i class="fa fa-lock" aria-hidden="true"></i></span></span>
                 <input id="pass" name="password" type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon2" data-toggle="tooltip" data-placement="top" title="Entrez votre password">
             </div>
+            <div id="WrgPass">Mauvais mot de passe</div>
             <input id="login" type="button" class="btn btn-lg btn-success btn-block" value="connecter">
         </form>
     </div>
   </div>
 </div>
-
-<script type="text/javascript">
-    $('#Login-modal').modal({
-        backdrop: 'static',
-        keyboard:  false
-    });
-    
-    $('#Login-modal').modal('show');
-</script>
-
-<script>
-        $("#login").click(function(){
-            var url = './login.do?username='+$('#user').val()+'&password='+$('#pass').val();
-            $.get(url,function(data,status){
-                switch(data){
-                    case "0":
-                        //code if no user
-                        alert("case wrong user");
-                        break;
-                    case "1":
-                        //code good authentification
-                        $('#Login-modal').modal('hide');
-                        break;
-                    case "2":
-                        //code if wrong password
-                        alert("case wrong pass");
-                        break;
-                    };
-                });
-                
-            });
-</script>
 
