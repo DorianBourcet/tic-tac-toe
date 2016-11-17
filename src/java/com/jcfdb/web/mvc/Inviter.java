@@ -4,6 +4,7 @@
  */
 package com.jcfdb.web.mvc;
 
+import com.jcfdb.entites.GestionnaireJeu;
 import com.jcfdb.entites.Invitation;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,16 +38,18 @@ public class Inviter extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String  joueur = request.getParameter("joueur");
+        PrintWriter out = response.getWriter();
+        String  invite = request.getParameter("joueur");
         //String msg = null;
-        HttpSession session = request.getSession();
+        /*HttpSession session = request.getSession();
         String hote = (String)session.getAttribute("connecte");
-        Invitation invitation = new Invitation(hote, joueur);
+        Invitation invitation = new Invitation(hote, invite);
         ServletContext appli = session.getServletContext();
         List invitations = (ArrayList)appli.getAttribute("listeInvitations");
         invitations.add(invitation);
-        appli.setAttribute("listeInvitations",invitations);
-        
+        appli.setAttribute("listeInvitations",invitations);*/
+        GestionnaireJeu.ajouterInvitation(request, invite);
+        out.print("1");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

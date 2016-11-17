@@ -47,6 +47,7 @@ public class GetDatas extends HttpServlet {
                     out.print(GestionnaireJeu.getListeJoueursJSON());
                     break;
                 case "listeInvitations" :
+                    out.print(GestionnaireJeu.getListeInvitationsJSON());
                     break;
                 case "grille" :
                     break;

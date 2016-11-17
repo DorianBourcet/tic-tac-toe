@@ -55,6 +55,37 @@ public class GestionnaireJeu {
         
     }
     
+    public static void ajouterInvitation(HttpServletRequest requete, String invite) {
+        List invitations = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeInvitations");
+        Invitation uneInvitation = new Invitation((String)requete.getAttribute("connecte"),invite);
+        invitations.add(uneInvitation);
+        EcouteurApplication.APPLI.setAttribute("listeInvitations", invitations);
+    }
+    
+    /*public static void enleverInvitations(HttpServletRequest requete) {
+        List invitations = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeInvitations");
+        Iterator itr = invitations.iterator();
+        joueurs.remove((String)requete.getSession().getAttribute("connecte"));
+        EcouteurApplication.APPLI.setAttribute("listeJoueurs", joueurs);
+        
+        List invitations = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeInvitations");
+        Iterator itr = invitations.iterator();
+        Invitation uneInvitation;
+        while (itr.hasNext()) {
+            uneInvitation = (Invitation)itr.next();
+            if (uneInvitation.getInvite().getNom().equals(requete.getSession().getAttribute("connecte")) || uneInvitation.getHote().getNom().equals(requete.getSession().getAttribute("connecte")))
+                itr.remove();
+        }
+        
+    }*/
+    
+    public static void enleverInvitation(String hote, String invite) {
+        List invitations = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeInvitations");
+        invitations.remove(new Invitation("hote","invite"));
+        EcouteurApplication.APPLI.setAttribute("listeInvitations", invitations);
+    
+    }
+    
     public static List getListeJoueurs() {
         List joueurs = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeJoueurs");
         //joueurs.remove(requete.getSession().getAttribute("connecte"));
@@ -98,6 +129,23 @@ public class GestionnaireJeu {
             }
         }*/
         return invitations;
+    }
+    
+    public static String getListeInvitationsJSON() {
+        List invitations = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeInvitations");
+        //System.out.println("Session : "+requete.getSession().getAttribute("connecte"));
+        //String currentUser = (String) session.getAttribute("connecte");
+        Iterator itr = invitations.iterator();
+        String json = "[";
+        Invitation uneInvitation;
+        while (itr.hasNext()) {
+            uneInvitation = itr.next(); // A FINIR !!!!
+            json +="{\""+itr.next()+"\"";
+            if (itr.hasNext())
+                json += ", ";
+        }
+        json += "]";
+        return json;
     }
     
     public Partie getPartie(HttpServletRequest requete) {

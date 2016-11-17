@@ -38,49 +38,46 @@ public class ControleurFrontal extends HttpServlet {
         HttpSession session = request.getSession();
         RequestDispatcher r;
         //System.out.println("Je suis le controleur !");
+        if (action.equals("login")) {
+            System.out.println("action est login");
+            r = this.getServletContext().getRequestDispatcher("/signin");
+            r.forward(request, response);
+            return;
+        }
+        if (session.getAttribute("connecte") == null) {
+            r = this.getServletContext().getRequestDispatcher("/index.jsp");
+            r.forward(request, response);
+            return;
+        }
+            switch (action)
+              {
+                  case "logout" :
+                        r = this.getServletContext().getRequestDispatcher("/signout");
+                        r.forward(request, response);
+                        break;
+                  case "inviter" :
+                        r = this.getServletContext().getRequestDispatcher("/invite");
+                        r.forward(request, response);
+                        break;
+                  case "start" :
+                        r = this.getServletContext().getRequestDispatcher("/start");
+                        r.forward(request, response);
+                        break;
+                  case "turn" :
+                        r = this.getServletContext().getRequestDispatcher("/turn");
+                        r.forward(request, response);
+                        break;
+                  case "obtenir" :
+                        r = this.getServletContext().getRequestDispatcher("/getDatas");
+                        r.forward(request, response);
+                        break;
+                  default :
+                        r = this.getServletContext().getRequestDispatcher("/index.jsp");
+                        r.forward(request, response);
+                        
+              }
+            
         
-
-        switch (action)
-          {
-              case "login" :
-                    r = this.getServletContext().getRequestDispatcher("/signin");
-                    break;
-              case "logout" :
-                    r = this.getServletContext().getRequestDispatcher("/signout");
-                    break;
-              case "inviter" :
-                    if (session.getAttribute("connecte") == null) {
-                        r = this.getServletContext().getRequestDispatcher("/index.jsp");
-                        break;
-                    }
-                    r = this.getServletContext().getRequestDispatcher("/invite");
-                    break;
-              case "start" :
-                    if (session.getAttribute("connecte") == null) {
-                        r = this.getServletContext().getRequestDispatcher("/index.jsp");
-                        break;
-                    }
-                    r = this.getServletContext().getRequestDispatcher("/start");
-                    break;
-              case "turn" :
-                    if (session.getAttribute("connecte") == null) {
-                        r = this.getServletContext().getRequestDispatcher("/index.jsp");
-                        break;
-                    }
-                    r = this.getServletContext().getRequestDispatcher("/turn");
-                    break;
-              case "obtenir" :
-                    if (session.getAttribute("connecte") == null) {
-                        r = this.getServletContext().getRequestDispatcher("/index.jsp");
-                        break;
-                    }
-                    r = this.getServletContext().getRequestDispatcher("/getDatas");
-                    break;
-              default :
-                    r = this.getServletContext().getRequestDispatcher("/index.jsp");
-          }
-
-        r.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
