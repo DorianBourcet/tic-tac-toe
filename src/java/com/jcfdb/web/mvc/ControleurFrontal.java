@@ -32,12 +32,12 @@ public class ControleurFrontal extends HttpServlet {
             throws ServletException, IOException {
         //String action = request.getParameter("action");
         String uri = request.getRequestURI();
-        System.out.println("Hahahaha "+uri);
+        //System.out.println("Hahahaha "+uri);
         String substring[] = uri.split("/");
         String action = substring[substring.length-1].replace(".do", "");
         HttpSession session = request.getSession();
         RequestDispatcher r;
-        System.out.println("Je suis le controleur !");
+        //System.out.println("Je suis le controleur !");
         
 
         switch (action)
@@ -49,15 +49,31 @@ public class ControleurFrontal extends HttpServlet {
                     r = this.getServletContext().getRequestDispatcher("/signout");
                     break;
               case "inviter" :
+                    if (session.getAttribute("connecte") == null) {
+                        r = this.getServletContext().getRequestDispatcher("/index.jsp");
+                        break;
+                    }
                     r = this.getServletContext().getRequestDispatcher("/invite");
                     break;
               case "start" :
+                    if (session.getAttribute("connecte") == null) {
+                        r = this.getServletContext().getRequestDispatcher("/index.jsp");
+                        break;
+                    }
                     r = this.getServletContext().getRequestDispatcher("/start");
                     break;
               case "turn" :
+                    if (session.getAttribute("connecte") == null) {
+                        r = this.getServletContext().getRequestDispatcher("/index.jsp");
+                        break;
+                    }
                     r = this.getServletContext().getRequestDispatcher("/turn");
                     break;
               case "obtenir" :
+                    if (session.getAttribute("connecte") == null) {
+                        r = this.getServletContext().getRequestDispatcher("/index.jsp");
+                        break;
+                    }
                     r = this.getServletContext().getRequestDispatcher("/getDatas");
                     break;
               default :

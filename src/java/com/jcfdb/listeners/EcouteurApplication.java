@@ -16,6 +16,8 @@ import javax.servlet.ServletContextListener;
  * @author moumene
  */
 public class EcouteurApplication implements ServletContextListener {
+    
+    public static ServletContext APPLI = null;
 
     private void initialiserAttributs(ServletContext sc) {
         sc.setAttribute("listeJoueurs", new ArrayList());
@@ -26,8 +28,8 @@ public class EcouteurApplication implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         System.out.println("Application d�marr�e");
-        ServletContext appli = sce.getServletContext();
-        appli.setAttribute("nbConnectes", 0);
+        APPLI = sce.getServletContext();
+        APPLI.setAttribute("nbConnectes", 0);
         initialiserAttributs(sce.getServletContext());
     }
 

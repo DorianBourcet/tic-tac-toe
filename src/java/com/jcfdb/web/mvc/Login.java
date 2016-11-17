@@ -83,8 +83,7 @@ public class Login extends HttpServlet {
             //connexion OK
             HttpSession session = request.getSession(true);
             session.setAttribute("connecte", u);
-            GestionnaireJeu gestionnaire = new GestionnaireJeu(session);
-            gestionnaire.ajouterJoueur();
+            GestionnaireJeu.ajouterJoueur(request);
             ServletContext appli = session.getServletContext();
             List listeJ = (ArrayList)appli.getAttribute("listeJoueurs");
             Iterator itr = listeJ.iterator();
