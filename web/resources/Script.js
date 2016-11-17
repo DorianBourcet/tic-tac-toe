@@ -5,6 +5,10 @@ $('#Login-modal').modal({
    
 $('#Login-modal').modal('show');
 
+$(function(){
+   if ($(".p-name").html() !== "") $(".p-name").fadeIn(); 
+});
+
 $("#login").click(function(){
     var url = './login.do?username='+$('#user').val()+'&password='+$('#pass').val();
     $('#user').css("border-color","");
@@ -22,7 +26,7 @@ $("#login").click(function(){
                 //code good authentification
                 $('#Login-modal').modal('hide');
                 $(".p-name").append($('#user').val());
-                $("#profile").fadeToggle();
+                $(".p-name").fadeIn();
                 break;
             case "2":
                 //code if wrong password
