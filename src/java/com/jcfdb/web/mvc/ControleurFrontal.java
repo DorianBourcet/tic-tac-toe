@@ -32,12 +32,12 @@ public class ControleurFrontal extends HttpServlet {
             throws ServletException, IOException {
         //String action = request.getParameter("action");
         String uri = request.getRequestURI();
-        System.out.println("Hahahaha "+uri);
+        //System.out.println("Hahahaha "+uri);
         String substring[] = uri.split("/");
         String action = substring[substring.length-1].replace(".do", "");
         HttpSession session = request.getSession();
         RequestDispatcher r;
-        System.out.println("Je suis le controleur !");
+        //System.out.println("Je suis le controleur !");
         
 
         switch (action)

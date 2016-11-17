@@ -8,6 +8,7 @@ import com.jcfdb.entites.User;
 import com.atoudeft.jdbc.Connexion;
 import com.jcfdb.entites.GestionnaireJeu;
 import com.jcfdb.jdbc.implementation.UserDao;
+import com.jcfdb.listeners.EcouteurSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -86,11 +87,14 @@ public class Login extends HttpServlet {
             GestionnaireJeu gestionnaire = new GestionnaireJeu(session);
             gestionnaire.ajouterJoueur();
             ServletContext appli = session.getServletContext();
-            List listeJ = (ArrayList)appli.getAttribute("listeJoueurs");
+            //List listeJ = (ArrayList)appli.getAttribute("listeJoueurs");
+            List listeJ = EcouteurSession.getAllSessions();
             Iterator itr = listeJ.iterator();
             System.out.println("Joueurs connectes :");
+            HttpSession uneSession = null;
             while (itr.hasNext())
-                System.out.println("- "+itr.next());
+                uneSession = (HttpSession)itr.next();
+                System.out.println("- "+uneSession.getAttribute("connecte"));
             //RequestDispatcher r = this.getServletContext().getRequestDispatcher("/index.jsp");
             //r.forward(request, response);
             out.print("1");

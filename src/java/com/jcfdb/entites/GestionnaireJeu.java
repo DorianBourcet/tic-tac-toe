@@ -63,12 +63,25 @@ public class GestionnaireJeu {
     
     public String getMaListeJoueursJSON() {
         List joueurs = (ArrayList)session.getServletContext().getAttribute("listeJoueurs");
-        joueurs.remove((String)session.getAttribute("connecte"));
+        System.out.println("Session : "+session.getAttribute("connecte"));
+        //String currentUser = (String) session.getAttribute("connecte");
         Iterator itr = joueurs.iterator();
+        Boolean supprime = false;
+        while (itr.hasNext() && !supprime) {
+            String currentUser = (String)itr.next();
+            System.out.println(currentUser);
+            if (currentUser == (String)session.getAttribute("connecte")) {
+                itr.remove();
+                supprime = true;
+            }
+        }
+        
+        //joueurs.remove(currentUser);
+        Iterator itr2 = joueurs.iterator();
         String json = "[";
-        while (itr.hasNext()) {
-            json +="\""+itr.next()+"\"";
-            if (itr.hasNext())
+        while (itr2.hasNext()) {
+            json +="\""+itr2.next()+"\"";
+            if (itr2.hasNext())
                 json += ", ";
         }
         json += "]";
