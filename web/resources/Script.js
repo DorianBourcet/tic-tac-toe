@@ -2,7 +2,7 @@ $('#Login-modal').modal({
     backdrop: 'static',
     keyboard:  false
 });
-    
+   
 $('#Login-modal').modal('show');
 
 $("#login").click(function(){
@@ -11,8 +11,6 @@ $("#login").click(function(){
     $('#pass').css("border-color","");
     $('#WrgUser').fadeOut();
     $('#WrgPass').fadeOut();
-    //$('#WrgUser').css("display","none");
-    //$('#WrgPass').css("display","none");
     $.get(url,function(data,status){
         switch(data){
             case "0":
@@ -23,6 +21,8 @@ $("#login").click(function(){
             case "1":
                 //code good authentification
                 $('#Login-modal').modal('hide');
+                $(".p-name").append($('#user').val());
+                $("#profile").fadeToggle();
                 break;
             case "2":
                 //code if wrong password
@@ -37,6 +37,21 @@ $("#pass").keyup(function(event){
     if(event.keyCode === 13){
         $("#login").click();
     }
+});
+
+$(".case").hover(function(){
+    if($(this).html() === "")
+    $(this).css("opacity","0.5").append("X");
+},function(){
+    if ($(this).css("opacity")=== "0.5")
+    $(this).empty();
+    });
+    
+$(".case").click(function(){
+    if ($(this).css("opacity")=== "0.5"){
+        //Add method AJAX to send response to server
+        $(this).css("opacity","1");
+    }    
 });
 
 

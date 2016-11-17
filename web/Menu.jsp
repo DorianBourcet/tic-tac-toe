@@ -9,7 +9,11 @@
         <div id="avatar" class="img-thumbnail rounded-circle mx-auto d-block">
             
         </div>
-        <p  class="p-name">{{PlayerName}} </p>
+        <p  class="p-name">
+            <% if (session.getAttribute("connecte")!=null){ 
+                out.print(session.getAttribute("connecte"));
+            }%>
+        </p>
         <%--<p id="btn4" >{{TEST ROTATE}}</p>  --%>
     </div>
     <div id="accordion" role="tablist" aria-multiselectable="true">
