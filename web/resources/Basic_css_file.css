@@ -7,6 +7,9 @@ and open the template in the editor.
     Created on : 2016-11-10, 08:57:30
     Author     : usager
 */
+#profile{
+    display: none;
+}
 
 #Menu{
     width: 250px;
@@ -91,3 +94,5 @@ and open the template in the editor.
     color: red;
     display: none;
 }
+
+
