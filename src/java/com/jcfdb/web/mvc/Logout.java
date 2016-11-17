@@ -35,7 +35,7 @@ public class Logout extends HttpServlet {
             throws ServletException, IOException {
         //déconnexion
         HttpSession session = request.getSession(true);
-        GestionnaireJeu gestionnaire = new GestionnaireJeu(session);
+        GestionnaireJeu gestionnaire = (GestionnaireJeu)session.getAttribute("gestionnaire");
         gestionnaire.enleverJoueur();
         //session.removeAttribute("connecte");
         System.out.println("Déconnexion de "+session.getAttribute("connecte"));

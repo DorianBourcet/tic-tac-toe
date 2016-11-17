@@ -40,7 +40,7 @@ public class GetDatas extends HttpServlet {
 
             String  e = request.getParameter("element");
             PrintWriter out = response.getWriter();
-            GestionnaireJeu gestionnaire = new GestionnaireJeu(request.getSession(true));
+            GestionnaireJeu gestionnaire = (GestionnaireJeu)request.getSession(true).getAttribute("gestionnaire");
             
             switch (e) {
                 case "listeJoueurs" :
