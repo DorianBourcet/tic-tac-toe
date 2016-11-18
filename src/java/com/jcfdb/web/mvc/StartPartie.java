@@ -49,6 +49,7 @@ public class StartPartie extends HttpServlet {
             parties.add(unePartie);
             appli.setAttribute("listeParties",parties);*/
             GestionnaireJeu.ajouterPartie(request, joueur);
+            GestionnaireJeu.enleverInvitation(joueur, (String)request.getSession().getAttribute("connecte"));
             out.print("1");
             
     }

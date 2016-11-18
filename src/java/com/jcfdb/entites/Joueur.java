@@ -15,10 +15,13 @@ public class Joueur {
     private char symbole;
 
     public Joueur() {
+        this.nom = "player";
+        this.symbole = '.';
     }
 
     public Joueur(String nom) {
         this.nom = nom;
+        this.symbole = '.';
     }
 
     public Joueur(String nom, char signe) {

@@ -52,6 +52,18 @@ public class GetDatas extends HttpServlet {
                 case "grille" :
                     out.print(GestionnaireJeu.getGrilleJSON(request));
                     break;
+                case "tour" : // retourne le nom du joueur qui doit jouer
+                    out.print(GestionnaireJeu.getTour(request));
+                    break;
+                case "symbole" :
+                    out.println(GestionnaireJeu.getSymbole(request));
+                    break;
+                case "adversaire" :
+                    out.println(GestionnaireJeu.getNomAdversaire(request));
+                    break;
+                case "etatPartie" :
+                    out.println(GestionnaireJeu.getEtatPartie(request));
+                    break;
                 
                 default :
                     out.print("");

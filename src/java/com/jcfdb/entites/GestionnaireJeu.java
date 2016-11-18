@@ -55,15 +55,43 @@ public class GestionnaireJeu {
         
     }
     
+    public static void enleverJoueur(HttpSession session) {
+        List joueurs = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeJoueurs");
+        // A continuer http://www.java67.com/2014/03/2-ways-to-remove-elementsobjects-from-ArrayList-java.html
+        //Iterator itr = joueurs.iterator();
+        joueurs.remove((String)session.getAttribute("connecte"));
+        EcouteurApplication.APPLI.setAttribute("listeJoueurs", joueurs);
+        
+        enleverInvitations((String)session.getAttribute("connecte"));
+        
+    }
+    
     public static boolean ajouterInvitation(HttpServletRequest requete, String invite) {
         List joueurs = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeJoueurs");
         List invitations = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeInvitations");
-        Iterator itr = joueurs.iterator();
+        Iterator itrJ = joueurs.iterator();
+        Iterator itrI = invitations.iterator();
         String unJoueur;
-        while (itr.hasNext()) {
-            unJoueur = (String)itr.next();
+        while (itrJ.hasNext()) {
+            unJoueur = (String)itrJ.next();
             if (unJoueur.equals(invite)) {
                 Invitation uneInvitation = new Invitation((String)requete.getSession().getAttribute("connecte"),invite);
+                
+                /*if (!invitations.contains(uneInvitation)) { // CONTAINS ne fonctionne pas. Essayer de trouver pourquoi.
+                    invitations.add(uneInvitation);
+                    EcouteurApplication.APPLI.setAttribute("listeInvitations", invitations);
+                    return true;
+                }*/
+                
+                Invitation currentInvitation;
+                while (itrI.hasNext()) {
+                    currentInvitation = (Invitation)itrI.next();
+                    if ((currentInvitation.getHote().getNom().equals(uneInvitation.getHote().getNom())
+                            && currentInvitation.getInvite().getNom().equals(uneInvitation.getInvite().getNom()))
+                            || (currentInvitation.getHote().getNom().equals(uneInvitation.getInvite().getNom())
+                            && currentInvitation.getInvite().getNom().equals(uneInvitation.getHote().getNom())))
+                        return false;
+                }
                 invitations.add(uneInvitation);
                 EcouteurApplication.APPLI.setAttribute("listeInvitations", invitations);
                 return true;
@@ -74,9 +102,26 @@ public class GestionnaireJeu {
     
     public static void enleverInvitation(String hote, String invite) {
         List invitations = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeInvitations");
-        invitations.remove(new Invitation("hote","invite"));
+        Iterator itr = invitations.iterator();
+        while(itr.hasNext()) {
+            Invitation uneInvitation = (Invitation)itr.next();
+            if (uneInvitation.getHote().getNom().equals(hote) && uneInvitation.getInvite().getNom().equals(invite))
+                itr.remove();
+        }
+        //invitations.remove(new Invitation("hote","invite"));
         EcouteurApplication.APPLI.setAttribute("listeInvitations", invitations);
     
+    }
+    
+    public static void enleverInvitations(String nomJoueur) {
+        List invitations = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeInvitations");
+        Iterator itr = invitations.iterator();
+        Invitation uneInvitation;
+        while (itr.hasNext()) {
+            uneInvitation = (Invitation)itr.next();
+            if (uneInvitation.getInvite().getNom().equals(nomJoueur) || uneInvitation.getHote().getNom().equals(nomJoueur))
+                itr.remove();
+        }
     }
     
     public static void ajouterPartie(HttpServletRequest requete, String joueur) {
@@ -120,7 +165,7 @@ public class GestionnaireJeu {
         return json;
     }
     
-    public List getListeInvitations() {
+    /*public List getListeInvitations() {
         List invitations = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeInvitations");
         /*Iterator itr = invitations.iterator();
         while(itr.hasNext()) {
@@ -128,9 +173,9 @@ public class GestionnaireJeu {
             if (!uneInvitation.getInvite().getNom().equals(requete.getSession().getAttribute("connecte"))) {
                 itr.remove();
             }
-        }*/
+        }
         return invitations;
-    }
+    }*/
     
     public static String getListeInvitationsJSON() {
         List invitations = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeInvitations");
@@ -163,7 +208,61 @@ public class GestionnaireJeu {
         return null;
     }
     
-    public static String getPartie(HttpServletRequest requete) {
+    public static String getTour(HttpServletRequest requete) {
+        List parties = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeParties");
+        Iterator itr = parties.iterator();
+        while(itr.hasNext()) {
+            Partie unePartie = (Partie)itr.next();
+            if (unePartie.getJoueur1().getNom().equals(requete.getSession().getAttribute("connecte")) || unePartie.getJoueur2().getNom().equals(requete.getSession().getAttribute("connecte"))) {
+                return unePartie.getMain().getNom();
+            }
+        }
+        return null;
+    }
+    
+    public static String getSymbole(HttpServletRequest requete) {
+        List parties = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeParties");
+        Iterator itr = parties.iterator();
+        while(itr.hasNext()) {
+            Partie unePartie = (Partie)itr.next();
+            if (unePartie.getJoueur1().getNom().equals(requete.getSession().getAttribute("connecte"))) {
+                return ""+unePartie.getJoueur1().getSymbole();
+            }
+            else if (unePartie.getJoueur2().getNom().equals(requete.getSession().getAttribute("connecte"))) {
+                return ""+unePartie.getJoueur2().getSymbole();
+            }
+        }
+        return null;
+    }
+    
+    public static String getNomAdversaire(HttpServletRequest requete) {
+        List parties = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeParties");
+        Iterator itr = parties.iterator();
+        while(itr.hasNext()) {
+            Partie unePartie = (Partie)itr.next();
+            if (unePartie.getJoueur1().getNom().equals(requete.getSession().getAttribute("connecte"))) {
+                return ""+unePartie.getJoueur2().getNom();
+            }
+            else if (unePartie.getJoueur2().getNom().equals(requete.getSession().getAttribute("connecte"))) {
+                return ""+unePartie.getJoueur1().getNom();
+            }
+        }
+        return null;
+    }
+    
+    public static String getEtatPartie(HttpServletRequest requete) {
+        List parties = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeParties");
+        Iterator itr = parties.iterator();
+        while(itr.hasNext()) {
+            Partie unePartie = (Partie)itr.next();
+            if (unePartie.getJoueur1().getNom().equals(requete.getSession().getAttribute("connecte")) || unePartie.getJoueur2().getNom().equals(requete.getSession().getAttribute("connecte"))) {
+                return ""+unePartie.isTerminee();
+            }
+        }
+        return null;
+    }
+    
+    /*public static String getPartie(HttpServletRequest requete) {
         List parties = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeParties");
         Iterator itr = parties.iterator();
         while(itr.hasNext()) {
@@ -172,6 +271,6 @@ public class GestionnaireJeu {
                 return unePartie.toString();
         }
         return null;
-    }
+    }*/
     
 }

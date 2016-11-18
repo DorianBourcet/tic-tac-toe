@@ -6,6 +6,7 @@
 
 package com.jcfdb.listeners;
 
+import com.jcfdb.entites.GestionnaireJeu;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -32,6 +33,7 @@ public class EcouteurSession implements HttpSessionListener {
     @Override
     public void sessionDestroyed(HttpSessionEvent se) {
         ServletContext appli = se.getSession().getServletContext();
+        GestionnaireJeu.enleverJoueur(se.getSession());
         int n = Integer.parseInt(appli.getAttribute("nbConnectes").toString());
         n--;
         System.out.println((n+1)+"eme Session ferm�e");
