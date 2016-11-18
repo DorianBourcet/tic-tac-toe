@@ -64,7 +64,7 @@ public class GrilleJeu {
     
     @Override
     public String toString() {
-        String chaine = new String();
+        String chaine = null;
         for (int i=0;i<3;i++) {
             for (int j=0;j<3;j++) {
                 chaine += getCase(i,j);
@@ -80,7 +80,7 @@ public class GrilleJeu {
         for (int i=0;i<3;i++) {
             json += "{";
             for (int j=0;j<3;j++) {
-                json = "\"" + i + j + "\":\"" + this.cases[i][j] + "\"";
+                json += "\"" + i + j + "\":\"" + this.cases[i][j] + "\"";
                 if (j<2)
                     json += ",";
             }

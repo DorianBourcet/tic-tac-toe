@@ -25,6 +25,7 @@ public class Partie {
     public Partie (String j1, String j2) {
         this.joueur1 = new Joueur(j1);
         this.joueur2 = new Joueur(j2);
+        this.grille = new GrilleJeu();
     }
     
     // ========== Accesseurs et mutateurs ==========
@@ -109,9 +110,9 @@ public class Partie {
     
     @Override
     public String toString() {
-        String chaine = new String();
+        String chaine;
         chaine = "j1 : " + this.joueur1.getNom() + " " + this.joueur1.getSymbole() + " j2 : " + this.joueur2.getNom() + " " + this.joueur2.getSymbole() + "\n\n";
-        chaine += this.grille.toString();
+        //chaine += this.grille.toString();
         chaine += "\n\nAu tour de : " + main.getNom();
         return chaine;
     }

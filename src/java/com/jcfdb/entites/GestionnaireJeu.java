@@ -55,35 +55,36 @@ public class GestionnaireJeu {
         
     }
     
-    public static void ajouterInvitation(HttpServletRequest requete, String invite) {
+    public static boolean ajouterInvitation(HttpServletRequest requete, String invite) {
+        List joueurs = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeJoueurs");
         List invitations = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeInvitations");
-        Invitation uneInvitation = new Invitation((String)requete.getAttribute("connecte"),invite);
-        invitations.add(uneInvitation);
-        EcouteurApplication.APPLI.setAttribute("listeInvitations", invitations);
-    }
-    
-    /*public static void enleverInvitations(HttpServletRequest requete) {
-        List invitations = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeInvitations");
-        Iterator itr = invitations.iterator();
-        joueurs.remove((String)requete.getSession().getAttribute("connecte"));
-        EcouteurApplication.APPLI.setAttribute("listeJoueurs", joueurs);
-        
-        List invitations = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeInvitations");
-        Iterator itr = invitations.iterator();
-        Invitation uneInvitation;
+        Iterator itr = joueurs.iterator();
+        String unJoueur;
         while (itr.hasNext()) {
-            uneInvitation = (Invitation)itr.next();
-            if (uneInvitation.getInvite().getNom().equals(requete.getSession().getAttribute("connecte")) || uneInvitation.getHote().getNom().equals(requete.getSession().getAttribute("connecte")))
-                itr.remove();
+            unJoueur = (String)itr.next();
+            if (unJoueur.equals(invite)) {
+                Invitation uneInvitation = new Invitation((String)requete.getSession().getAttribute("connecte"),invite);
+                invitations.add(uneInvitation);
+                EcouteurApplication.APPLI.setAttribute("listeInvitations", invitations);
+                return true;
+            }
         }
-        
-    }*/
+        return false;
+    }
     
     public static void enleverInvitation(String hote, String invite) {
         List invitations = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeInvitations");
         invitations.remove(new Invitation("hote","invite"));
         EcouteurApplication.APPLI.setAttribute("listeInvitations", invitations);
     
+    }
+    
+    public static void ajouterPartie(HttpServletRequest requete, String joueur) {
+        List parties = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeParties");
+        Partie partie = new Partie((String)requete.getSession().getAttribute("connecte"),joueur);
+        partie.initialiser();
+        parties.add(partie);
+        EcouteurApplication.APPLI.setAttribute("listeParties", parties);
     }
     
     public static List getListeJoueurs() {
@@ -139,8 +140,9 @@ public class GestionnaireJeu {
         String json = "[";
         Invitation uneInvitation;
         while (itr.hasNext()) {
-            uneInvitation = itr.next(); // A FINIR !!!!
-            json +="{\""+itr.next()+"\"";
+            uneInvitation = (Invitation)itr.next();
+            
+            json +="{\"hote\":\""+uneInvitation.getHote().getNom()+"\",\"invite\":\""+uneInvitation.getInvite().getNom()+"\"}";
             if (itr.hasNext())
                 json += ", ";
         }
@@ -148,13 +150,26 @@ public class GestionnaireJeu {
         return json;
     }
     
-    public Partie getPartie(HttpServletRequest requete) {
+    public static String getGrilleJSON(HttpServletRequest requete) {
+        List parties = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeParties");
+        Iterator itr = parties.iterator();
+        while(itr.hasNext()) {
+            Partie unePartie = (Partie)itr.next();
+            if (unePartie.getJoueur1().getNom().equals(requete.getSession().getAttribute("connecte")) || unePartie.getJoueur2().getNom().equals(requete.getSession().getAttribute("connecte"))) {
+                GrilleJeu uneGrille = unePartie.getGrille();
+                return uneGrille.toJSON();
+            }
+        }
+        return null;
+    }
+    
+    public static String getPartie(HttpServletRequest requete) {
         List parties = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeParties");
         Iterator itr = parties.iterator();
         while(itr.hasNext()) {
             Partie unePartie = (Partie)itr.next();
             if (unePartie.getJoueur1().getNom().equals(requete.getSession().getAttribute("connecte")) || unePartie.getJoueur2().getNom().equals(requete.getSession().getAttribute("connecte")))
-                return unePartie;
+                return unePartie.toString();
         }
         return null;
     }

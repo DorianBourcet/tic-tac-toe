@@ -48,8 +48,10 @@ public class Inviter extends HttpServlet {
         List invitations = (ArrayList)appli.getAttribute("listeInvitations");
         invitations.add(invitation);
         appli.setAttribute("listeInvitations",invitations);*/
-        GestionnaireJeu.ajouterInvitation(request, invite);
-        out.print("1");
+        if (GestionnaireJeu.ajouterInvitation(request, invite))
+            out.print("1");
+        else
+            out.print("0");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

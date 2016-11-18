@@ -5,6 +5,7 @@
 package com.jcfdb.web.mvc;
 
 import com.jcfdb.entites.Partie;
+import com.jcfdb.entites.GestionnaireJeu;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -36,16 +37,19 @@ public class StartPartie extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
+            PrintWriter out = response.getWriter();
             String joueur = request.getParameter("joueur");
-            HttpSession session = request.getSession();
+            /*HttpSession session = request.getSession();
             String joueur1 = (String)session.getAttribute("connecte");
             Partie unePartie = new Partie(joueur1, joueur);
             unePartie.initialiser();
             ServletContext appli = session.getServletContext();
             List parties = (ArrayList)appli.getAttribute("listeParties");
             parties.add(unePartie);
-            appli.setAttribute("listeParties",parties);
+            appli.setAttribute("listeParties",parties);*/
+            GestionnaireJeu.ajouterPartie(request, joueur);
+            out.print("1");
             
     }
 
