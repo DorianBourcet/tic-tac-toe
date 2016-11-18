@@ -4,7 +4,7 @@
     Author     : jycy
 --%>
 <div id="welcome">
-    <p id="wlcmMess">
+    <h1 id="wlcmMess">
         Bienvenue!
-    </p>
+    </h1>
 </div>

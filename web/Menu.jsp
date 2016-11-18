@@ -28,8 +28,8 @@
             </div>
 
             <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne">
-                <div class="card-block">
-                    Online poeple
+                <div id="listejoueur" class="card-block">
+                    <div>Online poeple</div>
                 </div>
             </div>
         </div>

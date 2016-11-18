@@ -7,6 +7,18 @@ $('#Login-modal').modal('show');
 
 $(function(){
    if ($(".p-name").html() !== "") $(".p-name").fadeIn(); 
+   setInterval(function(){ 
+       $.getJSON('./obtenir.do?element=listeJoueurs',function(data,status){
+           $('#listejoueur').empty();
+           $.each(data,function(i,joueur){
+               //$('#stars').append('<input type="text" id="star" value="'+star+'" />');
+               if($.trim($('.p-name').html()) !== joueur)
+               $('#listejoueur').append('<div><span class="col-xs-1"><i class="fa fa-user" aria-hidden="true"></i></span><span class="col-xs-8">     '+joueur+'</span><span class="col-xs-1"><i class=" fa fa-plus " aria-hidden="true"></i></span></div>');
+           });
+       });
+   }, 5000);
+   
+   
 });
 
 $("#login").click(function(){
@@ -57,5 +69,6 @@ $(".case").click(function(){
         $(this).css("opacity","1");
     }    
 });
+
 
 

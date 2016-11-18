@@ -29,7 +29,7 @@
         
         <div id = "MainScreen">
             <jsp:include page="Welcome.jsp"/>
-            <jsp:include page="Grid.jsp" />
+            <%--<jsp:include page="Grid.jsp" />--%>
         </div>
     </body>
     <script src="resources/Script.js"></script>

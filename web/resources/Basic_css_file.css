@@ -75,7 +75,10 @@ and open the template in the editor.
 }
 
 #login{
-    border-radius: 0px;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+    border-bottom-right-radius: .3rem;
+    border-bottom-left-radius: .3rem;
     margin-top: 20px;
 }
 .tile{
@@ -94,5 +97,19 @@ and open the template in the editor.
     color: red;
     display: none;
 }
+#wlcmMess{
+    text-align: center;
+    vertical-align: central;
+    height: 100%;
+    padding-top: 200px;
+}
+.modal-content{
+    background-color: #252830;
+    color: white;
+}
+#user,#pass,.input-group-addon{
+    border-color: white;
+}
+
 
 
