@@ -56,15 +56,15 @@ public class ControleurFrontal extends HttpServlet {
                         r.forward(request, response);
                         break;
                   case "inviter" :
-                        r = this.getServletContext().getRequestDispatcher("/invite");
+                        r = this.getServletContext().getNamedDispatcher("invitation");
                         r.forward(request, response);
                         break;
                   case "start" :
-                        r = this.getServletContext().getRequestDispatcher("/start");
+                        r = this.getServletContext().getNamedDispatcher("demarragePartie");
                         r.forward(request, response);
                         break;
                   case "turn" :
-                        r = this.getServletContext().getRequestDispatcher("/turn");
+                        r = this.getServletContext().getNamedDispatcher("jeu");
                         r.forward(request, response);
                         break;
                   case "obtenir" :

@@ -39,7 +39,10 @@ public class Inviter extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        String  invite = request.getParameter("joueur");
+        String joueur = null;
+        String invite = null;
+        joueur = (String)request.getSession().getAttribute("connecte");
+        invite = request.getParameter("joueur");
         //String msg = null;
         /*HttpSession session = request.getSession();
         String hote = (String)session.getAttribute("connecte");
@@ -48,7 +51,7 @@ public class Inviter extends HttpServlet {
         List invitations = (ArrayList)appli.getAttribute("listeInvitations");
         invitations.add(invitation);
         appli.setAttribute("listeInvitations",invitations);*/
-        if (GestionnaireJeu.ajouterInvitation(request, invite))
+        if (!joueur.equals(invite) && GestionnaireJeu.ajouterInvitation(request, invite))
             out.print("1");
         else
             out.print("0");
