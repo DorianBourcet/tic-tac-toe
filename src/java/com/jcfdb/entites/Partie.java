@@ -102,10 +102,10 @@ public class Partie {
     }
     
     public void changeMain() {
-        if (main == joueur1)
-            main = joueur2;
-        else if (main == joueur2)
-            main = joueur1;
+        if (this.main.getNom().equals(this.joueur1.getNom()))
+            this.main = this.joueur2;
+        else if (this.main.getNom().equals(this.joueur2.getNom()))
+            this.main = this.joueur1;
     }
     
     @Override

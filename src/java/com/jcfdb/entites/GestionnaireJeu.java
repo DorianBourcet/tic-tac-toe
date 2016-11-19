@@ -132,6 +132,20 @@ public class GestionnaireJeu {
         EcouteurApplication.APPLI.setAttribute("listeParties", parties);
     }
     
+    public static boolean jouerCase(HttpServletRequest requete, int y, int x) {
+        List parties = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeParties");
+        Iterator itr = parties.iterator();
+        while(itr.hasNext()) {
+            Partie unePartie = (Partie)itr.next();
+            if (unePartie.getMain().getNom().equals(requete.getSession().getAttribute("connecte"))) {
+                unePartie.remplirCase(y,x);
+                unePartie.changeMain();
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public static List getListeJoueurs() {
         List joueurs = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeJoueurs");
         //joueurs.remove(requete.getSession().getAttribute("connecte"));

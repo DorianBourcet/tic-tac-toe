@@ -4,6 +4,7 @@
  */
 package com.jcfdb.web.mvc;
 
+import com.jcfdb.entites.GestionnaireJeu;
 import com.jcfdb.entites.Partie;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,10 +38,11 @@ public class Jouer extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-            int coordX = Integer.parseInt(request.getParameter("x")),
-                coordY = Integer.parseInt(request.getParameter("y"));
-            HttpSession session = request.getSession();
+            
+            PrintWriter out = response.getWriter();
+            int colonne = Integer.parseInt(request.getParameter("c")),
+                ligne = Integer.parseInt(request.getParameter("l"));
+            /*HttpSession session = request.getSession();
             String joueur = (String)session.getAttribute("connecte");
             ServletContext appli = session.getServletContext();
             List parties = (ArrayList)appli.getAttribute("listeParties");
@@ -63,7 +65,9 @@ public class Jouer extends HttpServlet {
                 partieSelectionnee.changeMain();
                 // encore du code à faire
             parties.add(partieSelectionnee);
-            appli.setAttribute("listeParties",parties);
+            appli.setAttribute("listeParties",parties);*/
+            //out.print("hey");
+            out.print(""+GestionnaireJeu.jouerCase(request,ligne,colonne));
             
     }
 

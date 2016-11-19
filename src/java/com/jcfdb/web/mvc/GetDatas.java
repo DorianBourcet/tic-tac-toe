@@ -64,6 +64,9 @@ public class GetDatas extends HttpServlet {
                 case "etatPartie" :
                     out.println(GestionnaireJeu.getEtatPartie(request));
                     break;
+                case "ligne" :
+                    //out.println(GestionnaireJeu.getEtatPartie(request));
+                    break;
                 
                 default :
                     out.print("");
