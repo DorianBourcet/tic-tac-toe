@@ -58,8 +58,12 @@ public class Partie {
         return vainqueur;
     }
     
-    public void setVainqueur(Joueur vainqueur) {
-        this.vainqueur = vainqueur;
+    public void setVainqueurNull() {
+        this.vainqueur = null;
+    }
+    
+    public void designeVainqueur() {
+        this.vainqueur = this.main;
     }
     
     public GrilleJeu getGrille() {

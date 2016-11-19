@@ -139,6 +139,16 @@ public class GestionnaireJeu {
             Partie unePartie = (Partie)itr.next();
             if (unePartie.getMain().getNom().equals(requete.getSession().getAttribute("connecte"))) {
                 unePartie.remplirCase(y,x);
+                if (unePartie.getGrille().alignement()) {
+                    unePartie.designeVainqueur();
+                    unePartie.setTerminee(Boolean.TRUE);
+                    return true;
+                }
+                if (unePartie.getGrille().grillePleine()) {
+                    unePartie.setVainqueurNull();
+                    unePartie.setTerminee(Boolean.TRUE);
+                    return true;
+                }
                 unePartie.changeMain();
                 return true;
             }
@@ -274,6 +284,18 @@ public class GestionnaireJeu {
             }
         }
         return null;
+    }
+    
+    public static boolean getLigneComplete(HttpServletRequest requete) {
+        List parties = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeParties");
+        Iterator itr = parties.iterator();
+        while(itr.hasNext()) {
+            Partie unePartie = (Partie)itr.next();
+            if (unePartie.getJoueur1().getNom().equals(requete.getSession().getAttribute("connecte")) || unePartie.getJoueur2().getNom().equals(requete.getSession().getAttribute("connecte"))) {
+                return unePartie.getGrille().alignement(); // A TESTER
+            }
+        }
+        return false;
     }
     
     /*public static String getPartie(HttpServletRequest requete) {
