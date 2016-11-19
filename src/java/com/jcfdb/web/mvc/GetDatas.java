@@ -55,19 +55,20 @@ public class GetDatas extends HttpServlet {
                 case "tour" : // retourne le nom du joueur qui doit jouer
                     out.print(GestionnaireJeu.getTour(request));
                     break;
-                case "symbole" :
+                case "symbole" : // retourne le symbole du joueur
                     out.println(GestionnaireJeu.getSymbole(request));
                     break;
-                case "adversaire" :
+                case "adversaire" : // retourne le nom du joueur adverse
                     out.println(GestionnaireJeu.getNomAdversaire(request));
                     break;
-                case "etatPartie" :
+                case "etatPartie" : // la partie est-elle terminée ?
                     out.println(GestionnaireJeu.getEtatPartie(request));
                     break;
-                case "ligne" :
-                    //out.println(GestionnaireJeu.getEtatPartie(request));
+                case "ligne" : // Y a-t-il une ligne complète formée ?
+                    out.println(GestionnaireJeu.getLigneComplete(request));
                     break;
-                
+                case "vainqueur" : // si vainqueur est null et etatPartie true alors match nul.
+                    break;
                 default :
                     out.print("");
             }
