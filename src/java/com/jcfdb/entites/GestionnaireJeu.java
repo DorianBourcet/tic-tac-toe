@@ -137,7 +137,8 @@ public class GestionnaireJeu {
         Iterator itr = parties.iterator();
         while(itr.hasNext()) {
             Partie unePartie = (Partie)itr.next();
-            if (unePartie.getMain().getNom().equals(requete.getSession().getAttribute("connecte"))) {
+            if (unePartie.getMain().getNom().equals(requete.getSession().getAttribute("connecte"))
+                    && (unePartie.getGrille().getCase(y, x) == ' ')) {
                 unePartie.remplirCase(y,x);
                 if (unePartie.getGrille().alignement()) {
                     unePartie.designeVainqueur();
@@ -296,6 +297,18 @@ public class GestionnaireJeu {
             }
         }
         return false;
+    }
+    
+    public static String getNomVainqueur(HttpServletRequest requete) {
+        List parties = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeParties");
+        Iterator itr = parties.iterator();
+        while(itr.hasNext()) {
+            Partie unePartie = (Partie)itr.next();
+            if (unePartie.getJoueur1().getNom().equals(requete.getSession().getAttribute("connecte")) || unePartie.getJoueur2().getNom().equals(requete.getSession().getAttribute("connecte"))) {
+                return unePartie.getVainqueur().getNom();
+            }
+        }
+        return null;
     }
     
     /*public static String getPartie(HttpServletRequest requete) {

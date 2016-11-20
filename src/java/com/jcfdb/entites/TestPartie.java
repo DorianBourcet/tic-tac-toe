@@ -15,7 +15,7 @@ public class TestPartie {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Partie partie = new Partie();
+        /*Partie partie = new Partie();
         partie.getGrille().setCase(0, 0, 'X');
         partie.getGrille().setCase(0, 1, 'X');
         partie.getGrille().setCase(0, 2, 'X');
@@ -32,6 +32,10 @@ public class TestPartie {
         System.out.println(partie.toString());
        // System.out.println("Ligne complète ? "+partie.getGrille().verifierLigne());
        // System.out.println("Grille pleine ? "+partie.getGrille().verifierGrillePleine());
+*/
+        GrilleJeu g = new GrilleJeu();
+        System.out.println(g.toString());
+        System.out.println(g.alignement());
     }
     
 }
