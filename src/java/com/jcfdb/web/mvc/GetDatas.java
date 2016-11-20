@@ -68,6 +68,7 @@ public class GetDatas extends HttpServlet {
                     out.println(GestionnaireJeu.getLigneComplete(request));
                     break;
                 case "vainqueur" : // si vainqueur est null et etatPartie true alors match nul.
+                    out.println(GestionnaireJeu.getNomVainqueur(request));
                     break;
                 default :
                     out.print("");
