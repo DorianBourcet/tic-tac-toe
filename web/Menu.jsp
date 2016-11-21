@@ -21,7 +21,7 @@
             <div class="card-header" role="tab" id="headingOne">
                 <h5 class="mb-0">
                     <a data-toggle="collapse"  data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Joueur en ligne
+                        Joueurs en ligne
                         <i class="fa fa-arrow-right" aria-hidden="true"></i>
                     </a>
                 </h5>
@@ -29,7 +29,7 @@
 
             <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne">
                 <div id="listejoueur" class="card-block">
-                    <div>Online poeple</div>
+                    <div>(aucun joueur en ligne)    </div>
                 </div>
             </div>
         </div>
@@ -37,14 +37,14 @@
             <div class="card-header" role="tab" id="headingTwo">
                 <h5 class="mb-0">
                     <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Partie 
+                        Invitations reçues
                         <i class="fa fa-arrow-right" aria-hidden="true"></i>
                     </a>
                 </h5>
             </div>
             <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
-                <div class="card-block">
-                    Recherche partie
+                <div id="listeinvitations" class="card-block">
+                    (aucune invitation reçue)
                 </div>
             </div>
         </div>
