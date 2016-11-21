@@ -22,46 +22,67 @@ $(function(){
    $("#start").click(function(){
         var url = './start.do?joueur=toto';
         $.get(url,function(data,status){});
+        iniPartie();
    });
    
-   
-   
    setInterval(function(){
-       var url = './obtenir.do?element=etatPartie';
-       $.get(url,function(data,status){
-           if( $.trim(data) !== "true"){
-               var url = './obtenir.do?element=tour';
+               var url = './obtenir.do?element=etatPartie';
                $.get(url,function(data,status){
-                   if(data === $.trim($(".p-name").html())){
-                       var url = './obtenir.do?element=symbole';
-                           $.get(url,function(data,status){
-                               $(".case").hover(function(){
-                                   if($(this).html() === "")
-                                        $(this).css("opacity","0.5").append(data);
-                                    },function(){
-                                    if ($(this).css("opacity")=== "0.5"){
-                                        $(this).css("opacity","1");
-                                        $(this).empty();
-                                    }
+                   if( $.trim(data) !== "true") iniPartie();
+               });
+           },1000);
+   
+   
+   var init;
+   
+   function iniPartie(){
+       init = setInterval(function(){
+               var url = './obtenir.do?element=etatPartie';
+               $.get(url,function(data,status){
+                   if( $.trim(data) !== "true"){
+                       var url = './obtenir.do?element=tour';
+                       $.get(url,function(data,status){
+                           if(data === $.trim($(".p-name").html())){
+                               var url = './obtenir.do?element=symbole';
+                                   $.get(url,function(data,status){
+                                       $(".case").hover(function(){
+                                           if($(this).html() === "")
+                                                $(this).css("opacity","0.5").append(data);
+                                            },function(){
+                                            if ($(this).css("opacity")=== "0.5"){
+                                                $(this).css("opacity","1");
+                                                $(this).empty();
+                                            }
+                                            });
                                     });
-                            });
-                            $(".case").click(function(){
-                                if ($(this).css("opacity")=== "0.5"){
-                                //Add method AJAX to send response to server
-                                var url = './turn.do?l='+$.trim($(this).attr('value')[0])+'&c='+$.trim($(this).attr('value')[1]);
-                                $.get(url,function(data,status){
+                                    $(".case").click(function(){
+                                        if ($(this).css("opacity")=== "0.5"){
+                                        //Add method AJAX to send response to server
+                                        var url = './turn.do?l='+$.trim($(this).attr('value')[0])+'&c='+$.trim($(this).attr('value')[1]);
+                                        $.get(url,function(data,status){
+                                        });
+                                        $(this).css("opacity","1");
+                                        $(".case").off();
+                                    }    
                                 });
-                                $(this).css("opacity","1");
-                                $(".case").off();
-                            }    
+                            }
+                            else $(".case").off();
                         });
                     }
-                    else $(".case").off();
+                    else {
+                        $(".case").off();
+                        var url = './obtenir.do?element=vainqueur';
+                        $.get(url,function(data,status){
+                            //alert("Vainqueur: "+data);
+                        });
+                        $("#Game").fadeOut();
+                        clearInterval(init);
+                    }//PARTIE TERMINER;
                 });
-            }
-            else ;//PARTIE TERMINER;
-        });
-   },1000);
+           },1000);
+   }
+   
+   
    
    setInterval(function(){
    var url = './obtenir.do?element=grille';
