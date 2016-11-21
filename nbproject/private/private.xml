@@ -2,6 +2,23 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/soixa/Desktop/tic-tac-toe-master/src/java/com/jcfdb/entites/GestionnaireJeu.java</file>
+            <file>file:/C:/Users/soixa/Desktop/tic-tac-toe-master/src/java/com/jcfdb/entites/Joueur.java</file>
+            <file>file:/C:/Users/soixa/Desktop/tic-tac-toe-master/src/java/com/jcfdb/entites/GrilleJeu.java</file>
+            <file>file:/C:/Users/soixa/Desktop/tic-tac-toe-master/src/java/com/jcfdb/listeners/EcouteurSession.java</file>
+            <file>file:/C:/Users/soixa/Desktop/tic-tac-toe-master/src/java/com/jcfdb/entites/Partie.java</file>
+            <file>file:/C:/Users/soixa/Desktop/tic-tac-toe-master/src/java/com/jcfdb/entites/User.java</file>
+            <file>file:/C:/Users/soixa/Desktop/tic-tac-toe-master/src/java/com/jcfdb/entites/TestPartie.java</file>
+            <file>file:/C:/Users/soixa/Desktop/tic-tac-toe-master/src/java/com/jcfdb/entites/Invitation.java</file>
+            <file>file:/C:/Users/soixa/Desktop/tic-tac-toe-master/src/java/com/jcfdb/listeners/EcouteurApplication.java</file>
+            <file>file:/C:/Users/soixa/Desktop/tic-tac-toe-master/src/java/com/jcfdb/web/mvc/Login.java</file>
+            <file>file:/C:/Users/soixa/Desktop/tic-tac-toe-master/src/java/com/jcfdb/web/mvc/Inviter.java</file>
+            <file>file:/C:/Users/soixa/Desktop/tic-tac-toe-master/src/java/com/jcfdb/web/mvc/GetDatas.java</file>
+            <file>file:/C:/Users/soixa/Desktop/tic-tac-toe-master/src/java/com/jcfdb/web/mvc/Logout.java</file>
+            <file>file:/C:/Users/soixa/Desktop/tic-tac-toe-master/src/java/com/jcfdb/web/mvc/ControleurFrontal.java</file>
+            <file>file:/C:/Users/soixa/Desktop/tic-tac-toe-master/src/java/com/jcfdb/web/mvc/Jouer.java</file>
+            <file>file:/C:/Users/soixa/Desktop/tic-tac-toe-master/src/java/com/jcfdb/web/mvc/StartPartie.java</file>
+        </group>
     </open-files>
 </project-private>

@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Usager
+ * @author dbourcet
  */
 public class Logout extends HttpServlet {
 
@@ -35,7 +35,7 @@ public class Logout extends HttpServlet {
             throws ServletException, IOException {
         //déconnexion
         HttpSession session = request.getSession(true);
-        GestionnaireJeu.enleverJoueur(request);
+        //GestionnaireJeu.enleverJoueur(request);
         //session.removeAttribute("connecte");
         System.out.println("Déconnexion de "+session.getAttribute("connecte"));
         session.invalidate();

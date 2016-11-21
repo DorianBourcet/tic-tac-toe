@@ -30,16 +30,12 @@ public class ControleurFrontal extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //String action = request.getParameter("action");
         String uri = request.getRequestURI();
-        //System.out.println("Hahahaha "+uri);
         String substring[] = uri.split("/");
         String action = substring[substring.length-1].replace(".do", "");
         HttpSession session = request.getSession();
         RequestDispatcher r;
-        //System.out.println("Je suis le controleur !");
         if (action.equals("login")) {
-            System.out.println("action est login");
             r = this.getServletContext().getRequestDispatcher("/signin");
             r.forward(request, response);
             return;

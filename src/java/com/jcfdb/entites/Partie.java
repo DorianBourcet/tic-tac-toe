@@ -9,7 +9,7 @@ import java.util.Random;
 
 /**
  *
- * @author usager
+ * @author dbourcet
  */
 
 
@@ -19,14 +19,14 @@ public class Partie {
     private Boolean terminee = false;
     
     public Partie () {
-        this.vainqueur = new Joueur();
+        //this.vainqueur = new Joueur();
     }
     
     public Partie (String j1, String j2) {
         this.joueur1 = new Joueur(j1);
         this.joueur2 = new Joueur(j2);
         this.grille = new GrilleJeu();
-        this.vainqueur = new Joueur();
+        //this.vainqueur = new Joueur();
     }
     
     // ========== Accesseurs et mutateurs ==========

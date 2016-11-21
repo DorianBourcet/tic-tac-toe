@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Moumene
+ * @author dbourcet
  */
 public class Login extends HttpServlet {
 
@@ -38,7 +38,6 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //out.println("servlet login");
         String  u = request.getParameter("username"),
                 p = request.getParameter("password");
         if (u==null || u.trim().equalsIgnoreCase(""))
@@ -63,19 +62,10 @@ public class Login extends HttpServlet {
         
         if (user==null)
         {
-            //Utilisateur inexistant
-            //request.setAttribute("message", "Utilisateur "+u+" inexistant.");
-            //response.sendRedirect("login.jsp");Ne fonctionne pas correctement (ie. perd le message d'erreur).
-            //RequestDispatcher r = this.getServletContext().getRequestDispatcher("/Login.jsp");
-            //r.forward(request, response);
             out.print("0");
         }
         else if (!user.getPassword().equals(p))
         {
-            //Mot de passe incorrect
-            //request.setAttribute("message", "Mot de passe incorrect.");
-            //RequestDispatcher r = this.getServletContext().getRequestDispatcher("/Login.jsp");
-            //r.forward(request, response);
             out.print("2");
         }
         else
@@ -90,8 +80,6 @@ public class Login extends HttpServlet {
             System.out.println("Joueurs connectes :");
             while (itr.hasNext())
                 System.out.println("- "+itr.next());
-            //RequestDispatcher r = this.getServletContext().getRequestDispatcher("/index.jsp");
-            //r.forward(request, response);
             out.print("1");
         }
     }
