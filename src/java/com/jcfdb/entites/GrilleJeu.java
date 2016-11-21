@@ -78,13 +78,13 @@ public class GrilleJeu {
         String json;
         json = "[";
         for (int i=0;i<3;i++) {
-            json += "{";
+            //json += "{";
             for (int j=0;j<3;j++) {
-                json += "\"" + i + j + "\":\"" + this.cases[i][j] + "\"";
+                json += "\"" + this.cases[i][j] + "\"";
                 if (j<2)
                     json += ",";
             }
-            json += "}";
+            //json += "}";
             if (i<2)
                 json += ",";
         }
