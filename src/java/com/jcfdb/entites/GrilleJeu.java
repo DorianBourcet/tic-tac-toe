@@ -6,7 +6,7 @@ package com.jcfdb.entites;
 
 /**
  *
- * @author moumene
+ * @author dbourcet
  */
 public class GrilleJeu {
     private char[][] cases;

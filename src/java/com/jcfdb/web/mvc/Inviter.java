@@ -43,14 +43,7 @@ public class Inviter extends HttpServlet {
         String invite = null;
         joueur = (String)request.getSession().getAttribute("connecte");
         invite = request.getParameter("joueur");
-        //String msg = null;
-        /*HttpSession session = request.getSession();
-        String hote = (String)session.getAttribute("connecte");
-        Invitation invitation = new Invitation(hote, invite);
-        ServletContext appli = session.getServletContext();
-        List invitations = (ArrayList)appli.getAttribute("listeInvitations");
-        invitations.add(invitation);
-        appli.setAttribute("listeInvitations",invitations);*/
+        
         if (!joueur.equals(invite) && GestionnaireJeu.ajouterInvitation(request, invite))
             out.print("1");
         else

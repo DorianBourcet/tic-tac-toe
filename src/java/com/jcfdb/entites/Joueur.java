@@ -7,7 +7,7 @@ package com.jcfdb.entites;
 
 /**
  *
- * @author soixa
+ * @author dbourcet
  */
 public class Joueur {
     

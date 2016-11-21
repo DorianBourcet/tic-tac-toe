@@ -33,6 +33,8 @@ public class EcouteurSession implements HttpSessionListener {
     @Override
     public void sessionDestroyed(HttpSessionEvent se) {
         ServletContext appli = se.getSession().getServletContext();
+        GestionnaireJeu.enleverPartie(se.getSession());
+        GestionnaireJeu.enleverInvitations(se.getSession());
         GestionnaireJeu.enleverJoueur(se.getSession());
         int n = Integer.parseInt(appli.getAttribute("nbConnectes").toString());
         n--;

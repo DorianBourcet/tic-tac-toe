@@ -7,7 +7,7 @@ package com.jcfdb.entites;
 
 /**
  *
- * @author usager
+ * @author dbourcet
  */
 public class Invitation {
     
