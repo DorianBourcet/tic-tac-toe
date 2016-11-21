@@ -40,6 +40,7 @@ public class StartPartie extends HttpServlet {
         
             PrintWriter out = response.getWriter();
             String joueur = request.getParameter("joueur");
+            String terminer = request.getParameter("supprimer");
             /*HttpSession session = request.getSession();
             String joueur1 = (String)session.getAttribute("connecte");
             Partie unePartie = new Partie(joueur1, joueur);
@@ -48,9 +49,15 @@ public class StartPartie extends HttpServlet {
             List parties = (ArrayList)appli.getAttribute("listeParties");
             parties.add(unePartie);
             appli.setAttribute("listeParties",parties);*/
-            GestionnaireJeu.ajouterPartie(request, joueur);
-            GestionnaireJeu.enleverInvitation(joueur, (String)request.getSession().getAttribute("connecte"));
-            out.print("1");
+            if (joueur != null) {
+                GestionnaireJeu.ajouterPartie(request, joueur);
+                GestionnaireJeu.enleverInvitation(joueur, (String)request.getSession().getAttribute("connecte"));
+                out.print("1");
+            }
+            if (terminer != null) {
+                GestionnaireJeu.enleverPartie(request);
+                out.print("1");
+            }
             
     }
 
