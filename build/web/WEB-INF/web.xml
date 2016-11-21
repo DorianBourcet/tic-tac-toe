@@ -33,6 +33,22 @@
         <servlet-name>logout</servlet-name>
         <servlet-class>com.jcfdb.web.mvc.Logout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>donneesJoueur</servlet-name>
+        <servlet-class>com.jcfdb.web.mvc.GetDatas</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>invitation</servlet-name>
+        <servlet-class>com.jcfdb.web.mvc.Inviter</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>jeu</servlet-name>
+        <servlet-class>com.jcfdb.web.mvc.Jouer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>demarragePartie</servlet-name>
+        <servlet-class>com.jcfdb.web.mvc.StartPartie</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>controleur</servlet-name>
         <url-pattern>*.do</url-pattern>
@@ -42,12 +58,16 @@
         <url-pattern>/signin</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>donneesJoueur</servlet-name>
+        <url-pattern>/getDatas</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>logout</servlet-name>
         <url-pattern>/signout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
-            1
+            3
         </session-timeout>
     </session-config>
     <welcome-file-list>

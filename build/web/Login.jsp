@@ -7,10 +7,10 @@
 <div class="modal fade" id="Login-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
-        <h4 class="text-xs-center">
+        <h1 class="text-xs-center">
             Log in
             <%--LOGIN TO FINISH--%>
-        </h4>
+        </h1>
         <form> 
             <div class="input-group padding-input-login">
                 <span class="input-group-addon" id="User"><i class="fa fa-user" aria-hidden="true"></i></span>
@@ -22,7 +22,7 @@
                 <input id="pass" name="password" type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon2" data-toggle="tooltip" data-placement="top" title="Entrez votre password">
             </div>
             <div id="WrgPass">Mauvais mot de passe</div>
-            <input id="login" type="button" class="btn btn-lg btn-success btn-block" value="connecter">
+            <input id="login" type="button" class="btn btn-lg btn-danger btn-block" value="connecter">
         </form>
     </div>
   </div>
