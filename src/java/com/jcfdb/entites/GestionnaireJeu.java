@@ -124,6 +124,19 @@ public class GestionnaireJeu {
         }
     }
     
+    public static void enleverPartie(HttpServletRequest requete) {
+        List parties = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeParties");
+        Iterator itr = parties.iterator();
+        while(itr.hasNext()) {
+            Partie unePartie = (Partie)itr.next();
+            if (unePartie.getJoueur1().getNom().equals(requete.getSession().getAttribute("connecte")) || unePartie.getJoueur2().getNom().equals(requete.getSession().getAttribute("connecte")))
+                itr.remove();
+        }
+        //invitations.remove(new Invitation("hote","invite"));
+        EcouteurApplication.APPLI.setAttribute("listeParties", parties);
+    
+    }
+    
     public static void ajouterPartie(HttpServletRequest requete, String joueur) {
         List parties = (ArrayList)EcouteurApplication.APPLI.getAttribute("listeParties");
         Partie partie = new Partie((String)requete.getSession().getAttribute("connecte"),joueur);
