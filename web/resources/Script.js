@@ -13,13 +13,77 @@ $(function(){
            $.each(data,function(i,joueur){
                //$('#stars').append('<input type="text" id="star" value="'+star+'" />');
                if($.trim($('.p-name').html()) !== joueur)
-               $('#listejoueur').append('<div><span class="col-xs-1"><i class="fa fa-user" aria-hidden="true"></i></span><span class="col-xs-8">     '+joueur+'</span><span class="col-xs-1"><i class=" fa fa-plus " aria-hidden="true"></i></span></div>');
+               $('#listejoueur').append('<a value="'+joueur+'" class="inv" ><div class="col-xs-12"><i class="fa fa-user" aria-hidden="true"></i><span >     '+joueur+'</span></div></a>');
            });
-       });
+       });    
    }, 5000);
    
-   
+   //Démarré la partie
+   var url = './start.do?joueur=toto';
+   $.get(url,function(data,status){});
+   setInterval(function(){
+       var url = './obtenir.do?element=grille';
+       $.getJSON(url,function(data,status){
+           //FINIR LE JSON ICI----------------------------------------------------------------------------------------------
+           for( i =0;i<3;i++){
+               for(j=0;j<3;j++){
+                   $("#"+i+j+"").empty();
+                   if(data[i][j] !== "") $("#"+i+j+"").append(data[i][j]);
+               }
+           }
+       });
+       var url = './obtenir.do?element=tour';
+       $.get(url,function(data,status){
+         
+           if(data === $.trim($(".p-name").html())){
+               var url = './obtenir.do?element=symbole';
+                   $.get(url,function(data,status){
+                       $(".case").hover(function(){
+                           if($(this).html() === "")
+                                $(this).css("opacity","0.5").append(data);
+                            },function(){
+                            if ($(this).css("opacity")=== "0.5")
+                                $(this).empty();
+                            });
+                    });
+                    $(".case").click(function(){
+                        if ($(this).css("opacity")=== "0.5"){
+                        //Add method AJAX to send response to server
+                        var url = './turn.do?c='+$.trim($(this).attr('value')[0])+'&l='+$.trim($(this).attr('value')[1]);
+                        $.get(url,function(data,status){
+                            alert("fin de tour");
+                        });
+                        $(this).css("opacity","1");
+                        $(".case").off();
+                    }    
+                });
+            }
+            else $(".case").off();
+        });
+   },1000);
 });
+
+
+$("#btn-inv").click(function(){
+    $('#user-inv').css("border-color","");
+    $('#WrgInvUser').fadeOut();
+    $('#RgtInvUser').fadeOut();
+    var url = './inviter.do?joueur='+$("#user-inv").val();
+    $.get(url,function(data,status){
+        switch(data){
+            case "0":
+                $('#user-inv').css("border-color","red");
+                $('#WrgInvUser').fadeToggle();
+                break;
+            case "1":
+                $('#user-inv').css("border-color","lime");
+                $('#RgtInvUser').fadeToggle();
+                break;
+        };
+    });
+});
+
+ 
 
 $("#login").click(function(){
     var url = './login.do?username='+$('#user').val()+'&password='+$('#pass').val();
@@ -49,26 +113,15 @@ $("#login").click(function(){
     });
 });
 
+
+$("#user-inv").keyup(function(event){
+    if(event.keyCode === 13){
+        $("#btn-inv").click();
+    }
+});
+
 $("#pass").keyup(function(event){
     if(event.keyCode === 13){
         $("#login").click();
     }
 });
-
-$(".case").hover(function(){
-    if($(this).html() === "")
-    $(this).css("opacity","0.5").append("X");
-},function(){
-    if ($(this).css("opacity")=== "0.5")
-    $(this).empty();
-    });
-    
-$(".case").click(function(){
-    if ($(this).css("opacity")=== "0.5"){
-        //Add method AJAX to send response to server
-        $(this).css("opacity","1");
-    }    
-});
-
-
-

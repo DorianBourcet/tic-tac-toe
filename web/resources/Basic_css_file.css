@@ -74,7 +74,7 @@ and open the template in the editor.
     margin-top: 20px;
 }
 
-#login{
+#login,#btn-inv{
     border-top-right-radius: 0px;
     border-top-left-radius: 0px;
     border-bottom-right-radius: .3rem;
@@ -92,9 +92,14 @@ and open the template in the editor.
     width: 100%;
     text-align: center;
 }
-#WrgPass,#WrgUser{
+#WrgPass,#WrgUser,#WrgInvUser,#RgtInvUser{
     text-align: center;
     color: red;
+    display: none;
+}
+#RgtInvUser{
+    text-align: center;
+    color: lime;
     display: none;
 }
 #wlcmMess{
@@ -107,7 +112,7 @@ and open the template in the editor.
     background-color: #252830;
     color: white;
 }
-#user,#pass,.input-group-addon{
+#user,#pass,.input-group-addon,#user-inv{
     border-color: white;
 }
 

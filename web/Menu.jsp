@@ -49,6 +49,28 @@
             </div>
         </div>
     </div>
+    <input type="button"class="btn btn-block btn-danger" value="Invite" data-toggle="modal" data-target="#Invite-modal"/>
+    <input type="button"id="start" class="btn btn-block btn-success" value="Start"/>
+    
+    <div class="modal fade" id="Invite-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <h1 class="text-xs-center">
+                Invitation
+            </h1>
+            <form> 
+                <div class="input-group padding-input-login">
+                    <span class="input-group-addon" id="User"><i class="fa fa-user" aria-hidden="true"></i></span>
+                    <input id="user-inv" name="username" type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" data-toggle="tooltip" data-placement="top" title="Entrez un nom d'utilisateur">
+                </div>
+                <div id="WrgInvUser">Utilisateur inexistant ou non connecté</div>
+                <div id="RgtInvUser">Invitation avec succes!</div>
+                <input id="btn-inv" type="button" class="btn btn-lg btn-danger btn-block" value="Inviter">
+            </form>
+        </div>
+      </div>
+    </div>
+            
 </div>
 <%/*
 <script>
