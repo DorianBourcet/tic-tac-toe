@@ -11,7 +11,7 @@
             for(int i= 0;i<3;i++){
                 for(int j = 0;j<3;j++)
                 {
-                    out.print("<div class='col-xs-4 tile'> <p class = 'case' id= '"+i+j+"'></p> </div>");
+                    out.print("<div class='col-xs-4 tile'> <p class = 'case' id='"+i+j+"' value= '"+i+j+"'></p> </div>");
                 }
             }
         %>

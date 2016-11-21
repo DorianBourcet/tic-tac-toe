@@ -9,7 +9,11 @@
         <div id="avatar" class="img-thumbnail rounded-circle mx-auto d-block">
             
         </div>
-        <p  class="p-name">{{PlayerName}} </p>
+        <p  class="p-name">
+            <% if (session.getAttribute("connecte")!=null){ 
+                out.print(session.getAttribute("connecte"));
+            }%>
+        </p>
         <%--<p id="btn4" >{{TEST ROTATE}}</p>  --%>
     </div>
     <div id="accordion" role="tablist" aria-multiselectable="true">
@@ -24,8 +28,8 @@
             </div>
 
             <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne">
-                <div class="card-block">
-                    Online poeple
+                <div id="listejoueur" class="card-block">
+                    <div>Online poeple</div>
                 </div>
             </div>
         </div>
@@ -45,16 +49,26 @@
             </div>
         </div>
     </div>
-</div>
-<%/*
-<script>
-    $(function() {
-        $('#btn4').click(function() {
-            $(this).rotate({ endDeg:90,duration:.10, persist:true });        TEST ROTATE
-        }, function() {
-            $(this).rotate({ endDeg:0,duration:.10, persist:true});
-            });
-    });
+    <input type="button"class="btn btn-block btn-danger" value="Invite" data-toggle="modal" data-target="#Invite-modal"/>
+    <input type="button"id="start" class="btn btn-block btn-success" value="Start"/>
     
-</script> */
-%>
+    <div class="modal fade" id="Invite-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <h1 class="text-xs-center">
+                Invitation
+            </h1>
+            <form> 
+                <div class="input-group padding-input-login">
+                    <span class="input-group-addon" id="User"><i class="fa fa-user" aria-hidden="true"></i></span>
+                    <input id="user-inv" name="username" type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" data-toggle="tooltip" data-placement="top" title="Entrez un nom d'utilisateur">
+                </div>
+                <div id="WrgInvUser">Utilisateur inexistant ou non connecté</div>
+                <div id="RgtInvUser">Invitation avec succes!</div>
+                <input id="btn-inv" type="button" class="btn btn-lg btn-danger btn-block" value="Inviter">
+            </form>
+        </div>
+      </div>
+    </div>
+            
+</div>

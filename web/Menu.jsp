@@ -72,15 +72,3 @@
     </div>
             
 </div>
-<%/*
-<script>
-    $(function() {
-        $('#btn4').click(function() {
-            $(this).rotate({ endDeg:90,duration:.10, persist:true });        TEST ROTATE
-        }, function() {
-            $(this).rotate({ endDeg:0,duration:.10, persist:true});
-            });
-    });
-    
-</script> */
-%>

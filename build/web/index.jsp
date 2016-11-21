@@ -28,6 +28,7 @@
         <jsp:include page="Menu.jsp" />
         
         <div id = "MainScreen">
+            <%--<jsp:include page="Welcome.jsp"/>--%>
             <jsp:include page="Grid.jsp" />
         </div>
     </body>

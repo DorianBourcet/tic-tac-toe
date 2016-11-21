@@ -34,7 +34,7 @@ public class TestPartie {
        // System.out.println("Grille pleine ? "+partie.getGrille().verifierGrillePleine());
 */
         GrilleJeu g = new GrilleJeu();
-        System.out.println(g.toJSON());
+        System.out.println(g.toString());
         System.out.println(g.alignement());
     }
     

@@ -19,47 +19,62 @@ $(function(){
    }, 5000);
    
    //Démarré la partie
-   var url = './start.do?joueur=toto';
-   $.get(url,function(data,status){});
+   $("#start").click(function(){
+        var url = './start.do?joueur=toto';
+        $.get(url,function(data,status){});
+   });
+   
+   
+   
    setInterval(function(){
-       var url = './obtenir.do?element=grille';
-       $.getJSON(url,function(data,status){
-           //FINIR LE JSON ICI----------------------------------------------------------------------------------------------
-           for( i =0;i<3;i++){
-               for(j=0;j<3;j++){
-                   $("#"+i+j+"").empty();
-                   if(data[i][j] !== "") $("#"+i+j+"").append(data[i][j]);
-               }
-           }
-       });
-       var url = './obtenir.do?element=tour';
+       var url = './obtenir.do?element=etatPartie';
        $.get(url,function(data,status){
-         
-           if(data === $.trim($(".p-name").html())){
-               var url = './obtenir.do?element=symbole';
-                   $.get(url,function(data,status){
-                       $(".case").hover(function(){
-                           if($(this).html() === "")
-                                $(this).css("opacity","0.5").append(data);
-                            },function(){
-                            if ($(this).css("opacity")=== "0.5")
-                                $(this).empty();
+           if( $.trim(data) !== "true"){
+               var url = './obtenir.do?element=tour';
+               $.get(url,function(data,status){
+                   if(data === $.trim($(".p-name").html())){
+                       var url = './obtenir.do?element=symbole';
+                           $.get(url,function(data,status){
+                               $(".case").hover(function(){
+                                   if($(this).html() === "")
+                                        $(this).css("opacity","0.5").append(data);
+                                    },function(){
+                                    if ($(this).css("opacity")=== "0.5"){
+                                        $(this).css("opacity","1");
+                                        $(this).empty();
+                                    }
+                                    });
                             });
-                    });
-                    $(".case").click(function(){
-                        if ($(this).css("opacity")=== "0.5"){
-                        //Add method AJAX to send response to server
-                        var url = './turn.do?c='+$.trim($(this).attr('value')[0])+'&l='+$.trim($(this).attr('value')[1]);
-                        $.get(url,function(data,status){
-                            alert("fin de tour");
+                            $(".case").click(function(){
+                                if ($(this).css("opacity")=== "0.5"){
+                                //Add method AJAX to send response to server
+                                var url = './turn.do?l='+$.trim($(this).attr('value')[0])+'&c='+$.trim($(this).attr('value')[1]);
+                                $.get(url,function(data,status){
+                                });
+                                $(this).css("opacity","1");
+                                $(".case").off();
+                            }    
                         });
-                        $(this).css("opacity","1");
-                        $(".case").off();
-                    }    
+                    }
+                    else $(".case").off();
                 });
             }
-            else $(".case").off();
+            else ;//PARTIE TERMINER;
         });
+   },1000);
+   
+   setInterval(function(){
+   var url = './obtenir.do?element=grille';
+   $.getJSON(url,function(data){
+       $.each(data,function(l,v){
+           $.each(this,function(c,val){
+               if(val !==" "){
+                   $("#"+l+c+"").empty();
+                   $("#"+l+c+"").append(val);
+               }
+           });   
+       });
+   });
    },1000);
 });
 
