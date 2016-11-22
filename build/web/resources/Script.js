@@ -15,8 +15,33 @@ $(function(){
                if($.trim($('.p-name').html()) !== joueur)
                $('#listejoueur').append('<a value="'+joueur+'" class="inv" ><div class="col-xs-12"><i class="fa fa-user" aria-hidden="true"></i><span >     '+joueur+'</span></div></a>');
            });
-       });    
+       });
+       $.getJSON('./obtenir.do?element=listeInvitations',function(data,status){
+           $('#listeinvitations').empty();
+           $.each(data,function(i,invitation){
+               //$('#stars').append('<input type="text" id="star" value="'+star+'" />');
+               if($.trim($('.p-name').html()) === invitation.invite)
+               $('#listeinvitations').append('<a value="'+invitation.hote+'" class="inv" ><div class="col-xs-12"><i class="fa fa-user" aria-hidden="true"></i><span >     '+invitation.hote+'</span></div></a>');
+           });
+       });   
    }, 5000);
+   
+$("#listejoueur" ).on( "click", "a", function() {
+    //alert($(this).attr("value"));
+    var joueur = $(this).attr("value");
+    $.get("./inviter.do", {joueur: joueur}).done(function(data) {
+        //alert( "Data Loaded: " + data );
+    });
+});
+
+$("#listeinvitations" ).on( "click", "a", function() {
+    //alert($(this).attr("value"));
+    var joueur = $(this).attr("value");
+    $.get("./start.do", {joueur: joueur}).done(function(data) {
+        if (data === "1")
+            iniPartie();
+    });
+});
    
    //Démarré la partie
    $("#start").click(function(){
@@ -73,6 +98,7 @@ $(function(){
                         $(".case").off();
                         var url = './obtenir.do?element=vainqueur';
                         $.get(url,function(data,status){
+                            //if (data ===)
                             //alert("Vainqueur: "+data);
                         });
                         $("#Game").fadeOut();
