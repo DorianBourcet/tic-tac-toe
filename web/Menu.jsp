@@ -50,7 +50,6 @@
         </div>
     </div>
     <input type="button"class="btn btn-block btn-danger" value="Invite" data-toggle="modal" data-target="#Invite-modal"/>
-    <input type="button"id="start" class="btn btn-block btn-success" value="Start"/>
     
     <div class="modal fade" id="Invite-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-sm">

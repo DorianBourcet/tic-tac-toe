@@ -39,16 +39,10 @@ $("#listeinvitations" ).on( "click", "a", function() {
     var joueur = $(this).attr("value");
     $.get("./start.do", {joueur: joueur}).done(function(data) {
         if (data === "1")
+            if ($("#Game").css("display") === "none") $("#Game").fadeToggle();
             iniPartie();
     });
 });
-   
-   //Démarré la partie
-   $("#start").click(function(){
-        var url = './start.do?joueur=toto';
-        $.get(url,function(data,status){});
-        iniPartie();
-   });
    
    setInterval(function(){
                var url = './obtenir.do?element=etatPartie';
@@ -62,6 +56,17 @@ $("#listeinvitations" ).on( "click", "a", function() {
    
    function iniPartie(){
        init = setInterval(function(){
+           var url = './obtenir.do?element=grille';
+               $.getJSON(url,function(data){
+                   $.each(data,function(l,v){
+                       $.each(this,function(c,val){
+                           if(val !==" "){
+                               $("#"+l+c+"").empty();
+                               $("#"+l+c+"").append(val);
+                           }
+                       });   
+                   });
+               });
                var url = './obtenir.do?element=etatPartie';
                $.get(url,function(data,status){
                    if( $.trim(data) !== "true"){
@@ -102,27 +107,13 @@ $("#listeinvitations" ).on( "click", "a", function() {
                             //alert("Vainqueur: "+data);
                         });
                         $("#Game").fadeOut();
+                        var url = './start.do?supprimer';
+                        $.get(url,function(data,status){});
                         clearInterval(init);
                     }//PARTIE TERMINER;
                 });
            },1000);
    }
-   
-   
-   
-   setInterval(function(){
-   var url = './obtenir.do?element=grille';
-   $.getJSON(url,function(data){
-       $.each(data,function(l,v){
-           $.each(this,function(c,val){
-               if(val !==" "){
-                   $("#"+l+c+"").empty();
-                   $("#"+l+c+"").append(val);
-               }
-           });   
-       });
-   });
-   },1000);
 });
 
 
