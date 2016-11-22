@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Mar 15 Novembre 2016 à 19:26
+-- Généré le :  Mar 22 Novembre 2016 à 04:46
 -- Version du serveur :  5.7.11
 -- Version de PHP :  5.6.18
 
@@ -36,6 +36,7 @@ CREATE TABLE `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`pseudo`, `motdepasse`) VALUES
+('ali', 'ali'),
 ('dodo', 'dodo'),
 ('jycy', 'jycy'),
 ('titi', 'titi'),
